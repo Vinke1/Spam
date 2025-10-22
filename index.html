@@ -202,6 +202,12 @@
             background: var(--bg-light);
         }
 
+        .number-row:hover {
+            background: rgba(59, 130, 246, 0.08) !important;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
         .table tbody tr:last-child td {
             border-bottom: none;
         }
@@ -310,6 +316,16 @@
                 <div class="me-3">
                     <select class="form-select" id="daySelector" onchange="loadSelectedDay()">
                         <option value="global">📈 Analyse Globale</option>
+                        <option value="20251007">📅 07 Octobre 2025</option>
+                        <option value="20251008">📅 08 Octobre 2025</option>
+                        <option value="20251009">📅 09 Octobre 2025</option>
+                        <option value="20251010">📅 10 Octobre 2025</option>
+                        <option value="20251011">📅 11 Octobre 2025</option>
+                        <option value="20251012">📅 12 Octobre 2025</option>
+                        <option value="20251013">📅 13 Octobre 2025</option>
+                        <option value="20251014">📅 14 Octobre 2025</option>
+                        <option value="20251015">📅 15 Octobre 2025</option>
+                        <option value="20251016">📅 16 Octobre 2025</option>
                         <option value="20251018">📅 18 Octobre 2025</option>
                         <option value="20251019">📅 19 Octobre 2025</option>
                         <option value="20251020">📅 20 Octobre 2025</option>
@@ -442,6 +458,31 @@
         </div>
     </div>
 
+    <!-- Modal pour les détails d'un numéro -->
+    <div class="modal fade" id="numberDetailsModal" tabindex="-1" aria-labelledby="numberDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, var(--primary) 0%, #2563EB 100%); color: white;">
+                    <h5 class="modal-title" id="numberDetailsModalLabel">
+                        <span style="font-size: 1.5rem;">📱</span> Détails du Numéro
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                        <p class="mt-2">Chargement des statistiques...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-modern" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let callData = null;
@@ -491,7 +532,12 @@
 
         // Charger toutes les données des jours pour le graphique de comparaison
         async function loadAllDaysData() {
-            const days = ['20251018', '20251019', '20251020', '20251021'];
+            const days = [
+                '20251007', '20251008', '20251009', '20251010',
+                '20251011', '20251012', '20251013', '20251014',
+                '20251015', '20251016', '20251018', '20251019',
+                '20251020', '20251021'
+            ];
             for (const day of days) {
                 try {
                     const response = await fetch(`analysis_results/analysis_${day}.json`);
@@ -507,10 +553,49 @@
         function formatPhoneNumber(number) {
             // Enlever le .0 à la fin si présent
             let formatted = String(number).replace('.0', '');
-            // Ajouter un 0 au début si nécessaire pour les numéros belges
-            if (formatted.length === 9 && !formatted.startsWith('0')) {
-                formatted = '0' + formatted;
+
+            // Si déjà formaté, retourner
+            if (formatted.startsWith('0') || formatted.startsWith('+')) {
+                return formatted;
             }
+
+            // Numéros internationaux courants
+            // Format: indicatif pays + numéro national
+            const internationalPrefixes = {
+                '32': 11,   // Belgique +32 (10 chiffres après l'indicatif)
+                '33': 11,   // France +33
+                '34': 11,   // Espagne +34
+                '39': 11,   // Italie +39
+                '44': 12,   // UK +44
+                '49': 12,   // Allemagne +49
+                '31': 11,   // Pays-Bas +31
+                '41': 11,   // Suisse +41
+                '352': 11,  // Luxembourg +352
+                '48': 11    // Pologne +48
+            };
+
+            // Vérifier si c'est un numéro international
+            let isInternational = false;
+            for (const [prefix, expectedLength] of Object.entries(internationalPrefixes)) {
+                if (formatted.startsWith(prefix) && formatted.length >= expectedLength - 1 && formatted.length <= expectedLength + 1) {
+                    formatted = '+' + formatted;
+                    isInternational = true;
+                    break;
+                }
+            }
+
+            // Si ce n'est pas international, c'est probablement un numéro belge sans le 0
+            if (!isInternational) {
+                // Pour les numéros de 8 ou 9 chiffres (fixes/mobiles belges sans le 0)
+                if (formatted.length === 8 || formatted.length === 9) {
+                    formatted = '0' + formatted;
+                }
+                // Pour les numéros très longs qui n'ont pas été identifiés comme internationaux
+                else if (formatted.length > 10) {
+                    formatted = '+' + formatted;
+                }
+            }
+
             return formatted;
         }
 
@@ -733,14 +818,262 @@
                 }
 
                 const row = `
-                    <tr>
-                        <td><strong>${formattedNumber}</strong></td>
+                    <tr style="cursor: pointer;" onclick="showNumberDetails('${number}')" class="number-row">
+                        <td><strong style="color: var(--primary);">${formattedNumber}</strong></td>
                         <td>${count.toLocaleString()}</td>
                         <td><span class="${riskClass}">${risk}</span></td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
             });
+        }
+
+        async function showNumberDetails(number) {
+            const modal = new bootstrap.Modal(document.getElementById('numberDetailsModal'));
+            const modalBody = document.getElementById('modalBody');
+
+            // Afficher le spinner
+            modalBody.innerHTML = `
+                <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="mt-2">Chargement des statistiques...</p>
+                </div>
+            `;
+
+            modal.show();
+
+            try {
+                // Charger le fichier de détails approprié
+                const selector = document.getElementById('daySelector');
+                const selectedDay = selector.value;
+
+                let detailsFilename;
+                if (selectedDay === 'global') {
+                    detailsFilename = 'number_details/details_global.json';
+                } else {
+                    detailsFilename = `number_details/details_${selectedDay}.json`;
+                }
+
+                // Charger les détails
+                const response = await fetch(detailsFilename);
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const allDetails = await response.json();
+                const details = allDetails[number];
+
+                if (!details) {
+                    throw new Error('Détails non trouvés pour ce numéro');
+                }
+
+                const formattedNumber = formatPhoneNumber(number);
+                const callCount = details.total_calls;
+
+                // Déterminer le niveau de risque
+                let riskLevel, riskClass, riskIcon;
+                if (callCount > 100) {
+                    riskLevel = 'Très Élevé';
+                    riskClass = 'danger';
+                    riskIcon = '🔴';
+                } else if (callCount > 50) {
+                    riskLevel = 'Élevé';
+                    riskClass = 'warning';
+                    riskIcon = '🟠';
+                } else if (callCount > 20) {
+                    riskLevel = 'Moyen';
+                    riskClass = 'info';
+                    riskIcon = '🔵';
+                } else {
+                    riskLevel = 'Faible';
+                    riskClass = 'success';
+                    riskIcon = '🟢';
+                }
+
+                // Calculer le pourcentage par rapport au total
+                const percentage = ((callCount / callData.total_calls) * 100).toFixed(2);
+
+                // Préparer les données pour le graphique horaire
+                const hourlyData = details.peak_hours.calls_by_hour;
+                const hours = Object.keys(hourlyData).sort((a, b) => parseInt(a) - parseInt(b));
+                const hourLabels = hours.map(h => `${h}h`);
+                const hourValues = hours.map(h => hourlyData[h]);
+
+                // Afficher les statistiques disponibles
+                modalBody.innerHTML = `
+                    <div class="container-fluid">
+                        <div class="row mb-4">
+                            <div class="col-12 text-center">
+                                <h2 style="color: var(--primary); font-weight: 700;">${formattedNumber}</h2>
+                                <div class="badge bg-${riskClass} fs-6 px-3 py-2 mt-2">
+                                    ${riskIcon} Niveau de risque : ${riskLevel}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">
+                                            ${callCount.toLocaleString()}
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            TOTAL D'APPELS
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">
+                                            ${details.duration_stats.avg_formatted}
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            DURÉE MOYENNE
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--warning);">
+                                            ${details.peak_hours.peak_hour}h
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            HEURE DE PIC
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card" style="border: 1px solid var(--border);">
+                                    <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                        ⏱️ Durée des Appels
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Durée totale :</strong> ${details.duration_stats.total_formatted}</p>
+                                        <p><strong>Durée moyenne :</strong> ${details.duration_stats.avg_formatted}</p>
+                                        <p class="mb-0"><strong>Durée médiane :</strong> ${Math.floor(details.duration_stats.median_seconds / 60)}m ${Math.floor(details.duration_stats.median_seconds % 60)}s</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card" style="border: 1px solid var(--border);">
+                                    <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                        📊 Distribution des Appels
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Appels répondus :</strong> ${details.call_distribution.answered_calls} (${details.call_distribution.answered_calls_percent.toFixed(1)}%)</p>
+                                        <p><strong>Sans réponse :</strong> ${details.call_distribution.no_answer} (${details.call_distribution.no_answer_percent.toFixed(1)}%)</p>
+                                        <p class="mb-0"><strong>Appels courts (&lt;30s) :</strong> ${details.call_distribution.short_calls_lt_30s} (${details.call_distribution.short_calls_lt_30s_percent.toFixed(1)}%)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                📈 Distribution Horaire
+                            </div>
+                            <div class="card-body">
+                                <canvas id="hourlyDistributionChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                📞 Top Extensions Utilisées
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    ${Object.entries(details.top_devices).slice(0, 6).map(([ext, count]) => `
+                                        <div class="col-6 mb-2">
+                                            <span style="font-weight: 600; color: var(--primary);">${ext}</span> : ${count} appels
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info" style="background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;">
+                            <strong>📊 Analyse de Fréquence</strong>
+                            <p class="mb-0 mt-2">
+                                Ce numéro représente <strong>${percentage}%</strong> du total des appels.
+                                Heure de pic : <strong>${details.peak_hours.peak_hour}h avec ${details.peak_hours.peak_hour_calls} appels</strong>.
+                                ${callCount > 50 ? 'Cette fréquence élevée suggère un comportement potentiellement suspect.' : 'Cette fréquence est dans la normale.'}
+                            </p>
+                        </div>
+
+                        <div class="card" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                ℹ️ Informations Complémentaires
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Période analysée :</strong> ${details.label}</p>
+                                <p><strong>Classement :</strong> Top ${Object.keys(callData.top_20_numbers).indexOf(number) + 1} des numéros les plus fréquents</p>
+                                <p class="mb-0"><strong>Type de numéro :</strong> ${formattedNumber.startsWith('04') ? 'Mobile belge' : formattedNumber.startsWith('0') ? 'Fixe belge' : 'International'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Créer le graphique de distribution horaire
+                setTimeout(() => {
+                    const ctx = document.getElementById('hourlyDistributionChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: hourLabels,
+                            datasets: [{
+                                label: 'Nombre d\'appels',
+                                data: hourValues,
+                                backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: '#1F2937',
+                                    padding: 12,
+                                    cornerRadius: 8
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { color: '#6B7280' },
+                                    grid: { color: '#E5E7EB' }
+                                },
+                                x: {
+                                    ticks: { color: '#6B7280' },
+                                    grid: { display: false }
+                                }
+                            }
+                        }
+                    });
+                }, 100);
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des détails:', error);
+                modalBody.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>❌ Erreur</strong><br>
+                        Impossible de charger les détails du numéro. Veuillez réessayer.
+                    </div>
+                `;
+            }
         }
 
         function exportSpamList() {
