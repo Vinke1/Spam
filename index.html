@@ -3,195 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Analyse d'Appels - Détection Spam [VERSION ANIMÉE]</title>
+    <title>Dashboard Analyse d'Appels - Détection Spam</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary-color: #6366f1;
-            --primary-light: #a5b4fc;
-            --primary-dark: #4f46e5;
-            --secondary-color: #10b981;
-            --accent-color: #f59e0b;
-            --danger-color: #ef4444;
-            --warning-color: #f97316;
-            --success-color: #22c55e;
-            --neutral-50: #fafafa;
-            --neutral-100: #f5f5f5;
-            --neutral-200: #e5e5e5;
-            --neutral-300: #d4d4d4;
-            --neutral-400: #a3a3a3;
-            --neutral-500: #737373;
-            --neutral-600: #525252;
-            --neutral-700: #404040;
-            --neutral-800: #262626;
-            --neutral-900: #171717;
+            --primary: #3B82F6;
+            --secondary: #1F2937;
+            --accent: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --text-dark: #111827;
+            --text-gray: #6B7280;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: var(--bg-light);
             min-height: 100vh;
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            color: var(--text-dark);
             line-height: 1.6;
-            color: var(--neutral-800);
-            font-weight: 400;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
+        /* Navbar moderne */
+        .navbar {
+            background: var(--bg-white) !important;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
         }
 
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, rgba(99, 102, 241, 0.02) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: -1;
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-dark) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
+        .navbar-text {
+            color: var(--text-gray) !important;
+            font-size: 0.875rem;
         }
 
+        /* Cards modernes */
         .dashboard-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.08),
-                0 1px 3px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            border: 1px solid var(--neutral-200);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
             overflow: hidden;
-            position: relative;
-        }
-
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg,
-                transparent,
-                var(--primary-color),
-                var(--secondary-color),
-                var(--accent-color),
-                var(--primary-color),
-                transparent);
-            animation: gradientShift 3s ease-in-out infinite;
         }
 
         .dashboard-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            border-radius: 16px;
-            transition: all 0.3s ease;
+        .card-header {
+            background: var(--bg-white) !important;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
         }
 
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            transition: all 0.6s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .stat-card:hover::after {
-            width: 200px;
-            height: 200px;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-        }
-
+        /* Statistiques */
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: var(--neutral-900);
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
-            font-variant-numeric: tabular-nums;
         }
 
         .stat-label {
-            color: var(--neutral-500);
-            font-size: 0.875rem;
+            color: var(--text-gray);
+            font-size: 0.813rem;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-weight: 600;
         }
 
-        .spam-alert {
-            background: linear-gradient(135deg, var(--danger-color), var(--warning-color));
+        /* Badges de couleur pour les stats */
+        .stat-primary { color: var(--primary); }
+        .stat-success { color: var(--accent); }
+        .stat-warning { color: var(--warning); }
+        .stat-danger { color: var(--danger); }
+
+        /* Alerte info moderne */
+        .info-alert {
+            background: linear-gradient(135deg, var(--primary) 0%, #2563EB 100%);
             color: white;
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
         }
 
-        .spam-alert::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(30px, -30px);
+        .info-alert h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
+        .info-alert p {
+            margin: 0;
+            opacity: 0.95;
+            font-size: 0.938rem;
+        }
+
+        /* Boutons modernes */
+        .btn-modern {
+            background: var(--bg-white);
+            color: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.625rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-modern:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Form select moderne */
+        .form-select {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            transition: all 0.2s ease;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        /* Graphiques */
         .chart-container {
             position: relative;
             height: 400px;
@@ -199,589 +174,214 @@
             padding: 1rem;
         }
 
-        .navbar {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--neutral-200);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--neutral-800);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-text {
-            color: var(--neutral-600);
-            font-weight: 500;
-        }
-
-        .btn-spam {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-spam:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-            color: white;
-        }
-
-        .table-responsive {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
+        /* Table moderne */
         .table {
-            margin-bottom: 0;
+            margin: 0;
         }
 
         .table thead th {
-            background: var(--neutral-100);
-            border-bottom: 2px solid var(--neutral-200);
-            color: var(--neutral-700);
+            background: var(--bg-light);
+            border-bottom: 2px solid var(--border);
+            color: var(--text-dark);
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.813rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 1.25rem;
+            padding: 0.875rem 1rem;
         }
 
         .table tbody td {
-            padding: 1.25rem;
-            border-bottom: 1px solid var(--neutral-200);
-            color: var(--neutral-700);
-            font-weight: 500;
-        }
-
-        .table tbody tr {
-            transition: all 0.3s ease;
-            cursor: pointer;
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-dark);
+            font-size: 0.938rem;
         }
 
         .table tbody tr:hover {
-            background: linear-gradient(135deg, var(--neutral-50), rgba(99, 102, 241, 0.05));
-            transform: translateX(5px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: var(--bg-light);
         }
 
-        .table tbody td {
-            transition: all 0.2s ease;
-            position: relative;
+        .table tbody tr:last-child td {
+            border-bottom: none;
         }
 
-        .table tbody tr:hover td {
-            color: var(--neutral-800);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--neutral-100), white);
-            border-bottom: 1px solid var(--neutral-200);
-            padding: 1.5rem;
-            font-weight: 600;
-            color: var(--neutral-800);
-        }
-
-        .card-header:first-child {
-            border-radius: 20px 20px 0 0;
-        }
-
-        .warning-badge {
-            background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
+        /* Badges modernes */
+        .risk-badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-danger {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .badge-warning {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-success {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-info {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        /* Conteneur principal */
+        .container-fluid {
+            max-width: 1400px;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Espacements */
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Header des cards avec icônes */
+        .card-header-icon {
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            gap: 0.5rem;
+            font-size: 1rem;
         }
 
-        .warning-badge:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-        }
-
-        .warning-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .warning-badge:hover::before {
-            left: 100%;
-        }
-
-        .success-badge {
-            background: linear-gradient(135deg, var(--success-color), var(--secondary-color));
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .success-badge:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-
-        .success-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .success-badge:hover::before {
-            left: 100%;
-        }
-
-        .critical-badge {
-            background: linear-gradient(135deg, var(--danger-color), #dc2626);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .critical-badge:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-        }
-
-        .critical-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .critical-badge:hover::before {
-            left: 100%;
-        }
-
-        .btn-filter {
-            background: linear-gradient(135deg, var(--neutral-100), white);
-            border: 1px solid var(--neutral-300);
-            border-radius: 12px;
-            padding: 8px 16px;
-            font-weight: 500;
-            color: var(--neutral-700);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-filter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-filter:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-color: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-filter:hover::before {
-            left: 100%;
-        }
-
-        .btn-filter:active {
-            transform: translateY(0px);
-            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
-        }
-
-        /* Animations avancées */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes breathe {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            }
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
-            }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Animations subtiles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .dashboard-card {
-            animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation: fadeIn 0.4s ease-out;
         }
 
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .spam-alert {
-            animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            background: linear-gradient(-45deg, var(--danger-color), var(--warning-color), var(--accent-color), var(--primary-color));
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite, slideInLeft 0.8s ease-out;
-        }
-
-        .stat-number {
-            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-            animation-delay: calc(var(--delay, 0) + 0.5s);
-            position: relative;
-        }
-
-        .stat-number::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-            animation-delay: calc(var(--delay, 0) + 1s);
-        }
-
-        .dashboard-card:hover {
-            animation: breathe 0.6s ease-in-out;
-        }
-
-        .navbar-brand {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .btn-spam {
-            animation: glow 2s ease-in-out infinite alternate;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-spam::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-spam:hover::before {
-            left: 100%;
-        }
-
-        .warning-badge, .success-badge, .critical-badge {
-            animation: bounceIn 0.6s ease-out forwards;
-            position: relative;
-        }
-
-        .warning-badge::after, .success-badge::after, .critical-badge::after {
-            content: '✨';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 0.6rem;
-            animation: rotate 2s linear infinite;
-        }
-
-        .chart-container {
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.6s;
-        }
-
-        /* Effet de particules flottantes */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
-        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 3s; }
-        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 4s; }
-        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 5s; }
-        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 6s; }
-        .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 7s; }
-        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 8s; }
-
-        /* Animation du curseur de typing */
-        .typing-cursor {
-            animation: blink 1s infinite;
-            color: var(--danger-color);
-            font-weight: 400;
-        }
-
-        /* Responsive design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .dashboard-container {
-                padding: 10px;
-            }
-
             .stat-number {
-                font-size: 2rem;
-            }
-
-            .spam-alert {
-                padding: 1.5rem;
-                text-align: center;
+                font-size: 1.75rem;
             }
 
             .chart-container {
                 height: 300px;
             }
+
+            .info-alert {
+                padding: 1rem;
+            }
+        }
+
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-gray);
         }
     </style>
 </head>
 <body>
-    <!-- Particules flottantes -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg mb-4">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <span style="font-size: 1.8rem;">📊</span>
-                Dashboard Analyse d'Appels
-                <small class="d-block fw-normal" style="font-size: 0.75rem; color: var(--neutral-500); margin-top: -5px;">
-                    Système Anti-Spam
-                </small>
+                <span style="font-size: 1.5rem;">📊</span> Analyse d'Appels
             </a>
-            <div class="navbar-nav ms-auto">
+            <div class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                <div class="me-3">
+                    <select class="form-select" id="daySelector" onchange="loadSelectedDay()">
+                        <option value="global">📈 Analyse Globale</option>
+                        <option value="20251018">📅 18 Octobre 2025</option>
+                        <option value="20251019">📅 19 Octobre 2025</option>
+                        <option value="20251020">📅 20 Octobre 2025</option>
+                        <option value="20251021">📅 21 Octobre 2025</option>
+                    </select>
+                </div>
                 <span class="navbar-text">
-                    Dernière mise à jour: <span id="lastUpdate"></span>
+                    <span id="lastUpdate"></span>
                 </span>
             </div>
         </div>
     </nav>
 
-    <div class="dashboard-container">
-        <!-- Alertes Spam -->
-        <div class="spam-alert">
+    <div class="container-fluid">
+        <!-- Info Alert -->
+        <div class="info-alert">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h4 id="alertTitle">🚨 Alerte Spam Détectée !</h4>
-                    <p class="mb-0" id="alertText">Plus de 13,000 appels courts et 318 numéros très actifs identifiés. Prêt à bloquer les spams ?</p>
+                    <h4>📊 Résumé de l'Analyse</h4>
+                    <p id="alertMessage">Chargement des données...</p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <button class="btn btn-light btn-spam" onclick="exportSpamList()">
-                        📋 Exporter Liste Spam
+                    <button class="btn btn-modern" onclick="exportSpamList()">
+                        <span>📄</span> Exporter les données
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- Statistiques Générales -->
-        <div class="row mb-5 g-4">
+        <div class="row mb-4">
             <div class="col-md-3">
                 <div class="card dashboard-card">
-                    <div class="stat-card">
-                        <div class="stat-number" id="totalCalls">-</div>
-                        <div class="stat-label">Total des Appels</div>
-                        <small class="text-muted d-block mt-2">📈 Analyse complète</small>
+                    <div class="card-body text-center py-4">
+                        <div class="stat-number stat-primary" id="totalCalls">-</div>
+                        <div class="stat-label">Total Appels</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card dashboard-card">
-                    <div class="stat-card">
-                        <div class="stat-number" id="uniqueNumbers">-</div>
+                    <div class="card-body text-center py-4">
+                        <div class="stat-number stat-success" id="uniqueNumbers">-</div>
                         <div class="stat-label">Numéros Uniques</div>
-                        <small class="text-muted d-block mt-2">📱 Base de données</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card dashboard-card">
-                    <div class="stat-card">
-                        <div class="stat-number text-warning" id="shortCalls">-</div>
+                    <div class="card-body text-center py-4">
+                        <div class="stat-number stat-warning" id="shortCalls">-</div>
                         <div class="stat-label">Appels Courts (&lt;30s)</div>
-                        <small class="text-muted d-block mt-2">⚠️ Suspects potentiels</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card dashboard-card">
-                    <div class="stat-card">
-                        <div class="stat-number text-danger" id="frequentNumbers">-</div>
-                        <div class="stat-label">Numéros Très Actifs</div>
-                        <small class="text-muted d-block mt-2">🚨 Risque critique</small>
+                    <div class="card-body text-center py-4">
+                        <div class="stat-number stat-danger" id="uniqueDevices">-</div>
+                        <div class="stat-label">Extensions Uniques</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Graphiques -->
-        <div class="row mb-5">
+        <div class="row mb-4">
             <div class="col-md-12">
                 <div class="card dashboard-card">
                     <div class="card-header">
-                        <h5 class="mb-0 d-flex align-items-center gap-2">
-                            <span style="font-size: 1.5rem;">📊</span>
-                            Top 20 Numéros les Plus Fréquents
+                        <h5 class="mb-0 card-header-icon">
+                            <span>📞</span> Top 20 Numéros les Plus Fréquents
                         </h5>
                     </div>
                     <div class="card-body">
@@ -793,29 +393,24 @@
             </div>
         </div>
 
-        <!-- Table des Numéros Suspects -->
+        <!-- Table des Numéros -->
         <div class="card dashboard-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 d-flex align-items-center gap-2">
-                    <span style="font-size: 1.5rem;">🚨</span>
-                    Numéros Suspects à Bloquer
+                <h5 class="mb-0 card-header-icon">
+                    <span>📋</span> Détail des Numéros
                 </h5>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="warning-badge">
-                        <span style="font-size: 0.7rem;">⚠️</span>
-                        Risque Élevé/Critique
-                    </span>
-                    <button class="btn-filter" onclick="filterSuspects('high')">
-                        🔍 Filtrer Risque Élevé/Critique
+                <div>
+                    <button class="btn btn-modern btn-sm" onclick="filterSuspects('high')">
+                        Filtrer Risque Élevé
                     </button>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover" id="suspectsTable">
+                    <table class="table" id="suspectsTable">
                         <thead>
                             <tr>
-                                <th>Numéro de Téléphone</th>
+                                <th>Numéro</th>
                                 <th>Nombre d'Appels</th>
                                 <th>Niveau de Risque</th>
                             </tr>
@@ -828,55 +423,13 @@
             </div>
         </div>
 
-        <!-- Modal pour l'historique des heures d'appels -->
-        <div class="modal fade" id="hourHistoryModal" tabindex="-1" aria-labelledby="hourHistoryModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content dashboard-card">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="hourHistoryModalLabel">
-                            <span style="font-size: 1.2rem;">📊</span>
-                            Historique des heures d'appels - <span id="selectedPhoneNumber"></span>
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="chart-container">
-                            <canvas id="hourHistoryChart"></canvas>
-                        </div>
-                        <div class="mt-3">
-                            <h6 class="text-muted">📈 Statistiques horaires</h6>
-                            <div class="row text-center">
-                                <div class="col-3">
-                                    <div class="stat-number small" id="totalCallsForNumber">-</div>
-                                    <div class="stat-label small">Total des appels</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="stat-number small" id="peakHour">-</div>
-                                    <div class="stat-label small">Heure de pointe</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="stat-number small" id="shortestCall">-</div>
-                                    <div class="stat-label small">Appel le plus court</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="stat-number small" id="longestCall">-</div>
-                                    <div class="stat-label small">Appel le plus long</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Évolution des appels par jour - dernière section -->
-        <div class="row mb-5">
+        <!-- Évolution des appels par jour -->
+        <div class="row mb-4 mt-4">
             <div class="col-md-12">
                 <div class="card dashboard-card">
                     <div class="card-header">
-                        <h5 class="mb-0 d-flex align-items-center gap-2">
-                            <span style="font-size: 1.5rem;">📈</span>
-                            Évolution des Appels par Jour
+                        <h5 class="mb-0 card-header-icon">
+                            <span>📈</span> Évolution des Appels par Jour
                         </h5>
                     </div>
                     <div class="card-body">
@@ -891,833 +444,356 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Données intégrées directement dans le dashboard
-        const callData = {
-            "total_calls": 21338,
-            "unique_numbers": 4844,
-            "calls_by_type": {
-                "In": 21335,
-                "T2TIn": 3
-            },
-            "calls_by_category": {
-                "Incoming": 21338
-            },
-            "calls_by_date": {
-                "2025-09-20 00:00:00": 21338
-            },
-            "top_numbers": {
-                "0497247057": 64,
-                "0496305005": 53,
-                "0488145358": 47,
-                "028941717": 46,
-                "0472658206": 43,
-                "0475838593": 37,
-                "025341270": 37,
-                "0499326414": 34,
-                "0475205963": 34,
-                "0475655080": 32,
-                "0476579230": 32,
-                "023675017": 31,
-                "0487533684": 30,
-                "026630800": 30,
-                "0479352176": 30,
-                "0470676916": 30,
-                "0493819782": 30,
-                "0474547395": 29,
-                "0474491446": 29,
-                "0472333535": 29
-            },
-            "calls_by_hour_per_number": {
-                "0497247057": {
-                    "10": 63,
-                    "11": 1
-                },
-                "0496305005": {
-                    "8": 45,
-                    "9": 2,
-                    "10": 6
-                },
-                "0488145358": {
-                    "8": 2,
-                    "9": 6,
-                    "10": 10,
-                    "11": 29
-                },
-                "028941717": {
-                    "10": 9,
-                    "11": 15,
-                    "12": 22
-                },
-                "0472658206": {
-                    "8": 26,
-                    "10": 12,
-                    "11": 5
-                },
-                "0475838593": {
-                    "10": 12,
-                    "14": 25
-                },
-                "025341270": {
-                    "7": 9,
-                    "11": 24,
-                    "14": 4
-                },
-                "0499326414": {
-                    "13": 1,
-                    "14": 8,
-                    "15": 25
-                },
-                "0475205963": {
-                    "10": 34
-                },
-                "0475655080": {
-                    "9": 5,
-                    "10": 27
-                },
-                "0476579230": {
-                    "8": 7,
-                    "9": 25
-                },
-                "023675017": {
-                    "10": 31
-                },
-                "0487533684": {
-                    "9": 6,
-                    "10": 24
-                },
-                "026630800": {
-                    "9": 1,
-                    "10": 10,
-                    "11": 14,
-                    "12": 3,
-                    "13": 2
-                },
-                "0479352176": {
-                    "9": 3,
-                    "10": 27
-                },
-                "0470676916": {
-                    "9": 22,
-                    "10": 8
-                },
-                "0493819782": {
-                    "10": 30
-                },
-                "0474547395": {
-                    "12": 29
-                },
-                "0474491446": {
-                    "8": 4,
-                    "9": 1,
-                    "10": 13,
-                    "14": 10,
-                    "15": 1
-                },
-                "0472333535": {
-                    "10": 29
-                }
-            },
-            "call_durations_per_number": {
-                "0497247057": {
-                    "min_duration": 0,
-                    "max_duration": 151
-                },
-                "0496305005": {
-                    "min_duration": 0,
-                    "max_duration": 155
-                },
-                "0488145358": {
-                    "min_duration": 0,
-                    "max_duration": 553
-                },
-                "028941717": {
-                    "min_duration": 0,
-                    "max_duration": 270
-                },
-                "0472658206": {
-                    "min_duration": 0,
-                    "max_duration": 335
-                },
-                "0475838593": {
-                    "min_duration": 0,
-                    "max_duration": 48
-                },
-                "025341270": {
-                    "min_duration": 0,
-                    "max_duration": 379
-                },
-                "0499326414": {
-                    "min_duration": 0,
-                    "max_duration": 413
-                },
-                "0475205963": {
-                    "min_duration": 0,
-                    "max_duration": 29
-                },
-                "0475655080": {
-                    "min_duration": 0,
-                    "max_duration": 636
-                },
-                "0476579230": {
-                    "min_duration": 0,
-                    "max_duration": 930
-                },
-                "023675017": {
-                    "min_duration": 0,
-                    "max_duration": 176
-                },
-                "0487533684": {
-                    "min_duration": 0,
-                    "max_duration": 322
-                },
-                "026630800": {
-                    "min_duration": 0,
-                    "max_duration": 122
-                },
-                "0479352176": {
-                    "min_duration": 0,
-                    "max_duration": 346
-                },
-                "0470676916": {
-                    "min_duration": 0,
-                    "max_duration": 133
-                },
-                "0493819782": {
-                    "min_duration": 0,
-                    "max_duration": 786
-                },
-                "0474547395": {
-                    "min_duration": 0,
-                    "max_duration": 35
-                },
-                "0474491446": {
-                    "min_duration": 0,
-                    "max_duration": 582
-                },
-                "0472333535": {
-                    "min_duration": 0,
-                    "max_duration": 101
-                }
-            },
-            "short_calls_count": 13571,
-            "frequent_numbers_count": 318,
-            "frequent_numbers_list": [
-                "0497247057",
-                "0496305005",
-                "0488145358",
-                "028941717",
-                "0472658206",
-                "0475838593",
-                "025341270",
-                "0499326414",
-                "0475205963",
-                "0475655080",
-                "0476579230",
-                "023675017",
-                "0487533684",
-                "026630800",
-                "0479352176",
-                "0470676916",
-                "0493819782",
-                "0474547395",
-                "0474491446",
-                "0472333535"
-            ]
-        };
+        let callData = null;
+        let currentCharts = {};
+        let allDaysData = {};
 
-        // Charger les données
-        function loadData() {
-            updateDashboard();
-        }
+        // Charger les données d'un jour spécifique
+        async function loadSelectedDay() {
+            const selector = document.getElementById('daySelector');
+            const selectedDay = selector.value;
 
-        function updateDashboard() {
+            let filename;
+            if (selectedDay === 'global') {
+                filename = 'analysis_results/analysis_global.json';
+            } else {
+                filename = `analysis_results/analysis_${selectedDay}.json`;
+            }
+
             try {
-                // Mettre à jour la date
-                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('fr-FR');
-
-                // Animer les compteurs
-                animateCounter('totalCalls', callData.total_calls);
-                animateCounter('uniqueNumbers', callData.unique_numbers);
-                animateCounter('shortCalls', callData.short_calls_count);
-                animateCounter('frequentNumbers', callData.frequent_numbers_count);
-
-                // Créer les graphiques avec un délai pour s'assurer que les styles sont appliqués
-                setTimeout(() => {
-                    createDateChart();
-                    createTopNumbersChart();
-                    createSuspectsTable();
-                }, 100);
-
-                console.log('Dashboard mis à jour avec succès');
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                callData = await response.json();
+                updateDashboard();
             } catch (error) {
-                console.error('Erreur lors de la mise à jour du dashboard:', error);
+                console.error('Erreur lors du chargement des données:', error);
+
+                // Afficher un message d'erreur détaillé
+                const alertMessage = document.getElementById('alertMessage');
+                alertMessage.innerHTML = `
+                    <strong>⚠️ Impossible de charger les données</strong><br><br>
+                    <strong>Raison :</strong> Les navigateurs bloquent le chargement de fichiers locaux pour des raisons de sécurité.<br><br>
+                    <strong>Solutions :</strong><br>
+                    1️⃣ Double-cliquez sur <strong>OUVRIR_DASHBOARD.bat</strong> (plus simple)<br>
+                    2️⃣ Ou dans un terminal : <code style="background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">python -m http.server 8000</code><br>
+                    3️⃣ Ou publiez sur GitHub Pages (voir DEPLOY_GITHUB.md)
+                `;
+
+                // Afficher aussi dans la console pour plus de détails
+                console.log('%c🔧 SOLUTIONS', 'font-size: 16px; font-weight: bold; color: #3B82F6;');
+                console.log('1. Double-cliquez sur OUVRIR_DASHBOARD.bat');
+                console.log('2. Ou exécutez: python -m http.server 8000');
+                console.log('3. Puis ouvrez: http://localhost:8000');
             }
         }
 
-        function animateCounter(elementId, targetValue, duration = 2000) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-
-            const startValue = 0;
-            const startTime = performance.now();
-
-            const animate = (currentTime) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-
-                // Fonction d'easing pour un effet plus naturel
-                const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-
-                const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOutExpo);
-
-                // Ajouter l'animation de pulse pendant le comptage
-                element.style.animation = 'pulse 0.5s ease-in-out infinite';
-
-                element.textContent = currentValue.toLocaleString();
-
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    // Animation finale
-                    element.style.animation = 'bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                    // Ajouter un effet de brillance final
-                    setTimeout(() => {
-                        element.style.textShadow = '0 0 20px rgba(99, 102, 241, 0.6)';
-                        setTimeout(() => {
-                            element.style.textShadow = 'none';
-                        }, 1000);
-                    }, 300);
+        // Charger toutes les données des jours pour le graphique de comparaison
+        async function loadAllDaysData() {
+            const days = ['20251018', '20251019', '20251020', '20251021'];
+            for (const day of days) {
+                try {
+                    const response = await fetch(`analysis_results/analysis_${day}.json`);
+                    if (response.ok) {
+                        allDaysData[day] = await response.json();
+                    }
+                } catch (error) {
+                    console.error(`Erreur chargement jour ${day}:`, error);
                 }
-            };
+            }
+        }
 
-            requestAnimationFrame(animate);
+        function formatPhoneNumber(number) {
+            // Enlever le .0 à la fin si présent
+            let formatted = String(number).replace('.0', '');
+            // Ajouter un 0 au début si nécessaire pour les numéros belges
+            if (formatted.length === 9 && !formatted.startsWith('0')) {
+                formatted = '0' + formatted;
+            }
+            return formatted;
+        }
+
+        function updateDashboard() {
+            if (!callData) return;
+
+            // Mettre à jour les statistiques
+            document.getElementById('totalCalls').textContent = callData.total_calls.toLocaleString();
+            document.getElementById('uniqueNumbers').textContent = callData.unique_numbers.toLocaleString();
+            document.getElementById('shortCalls').textContent = callData.call_categories.short_calls_lt_30s.toLocaleString();
+            document.getElementById('uniqueDevices').textContent = callData.unique_devices.toLocaleString();
+
+            // Mettre à jour le message d'alerte
+            const shortCallsPercent = (callData.call_categories.short_calls_lt_30s / callData.total_calls * 100).toFixed(1);
+            const noAnswerPercent = (callData.call_categories.no_answer_0s / callData.total_calls * 100).toFixed(1);
+            document.getElementById('alertMessage').innerHTML = `
+                ${callData.call_categories.short_calls_lt_30s.toLocaleString()} appels courts (&lt;30s, ${shortCallsPercent}%) et
+                ${callData.call_categories.no_answer_0s.toLocaleString()} sans réponse (${noAnswerPercent}%).
+                Période: ${callData.label}
+            `;
+
+            // Mettre à jour la date
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleString('fr-FR');
+
+            // Créer les graphiques
+            createDateChart();
+            createTopNumbersChart();
+            createSuspectsTable();
         }
 
 
         function createDateChart() {
-            try {
-                const canvas = document.getElementById('dateChart');
-                if (!canvas) {
-                    console.error('Canvas dateChart non trouvé');
-                    return;
-                }
+            const ctx = document.getElementById('dateChart').getContext('2d');
 
-                const ctx = canvas.getContext('2d');
-                const dates = Object.keys(callData.calls_by_date);
-                const values = Object.values(callData.calls_by_date);
+            // Détruire le graphique existant s'il existe
+            if (currentCharts.dateChart) {
+                currentCharts.dateChart.destroy();
+            }
 
-                console.log('Création du graphique des dates avec', dates.length, 'points');
+            // Utiliser les données de tous les jours
+            const dates = Object.keys(allDaysData).map(d => {
+                const year = d.substring(0, 4);
+                const month = d.substring(4, 6);
+                const day = d.substring(6, 8);
+                return `${day}/${month}/${year}`;
+            });
+            const values = Object.values(allDaysData).map(d => d.total_calls);
 
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: dates,
-                        datasets: [{
-                            label: 'Nombre d\'appels',
-                            data: values,
-                            borderColor: 'var(--primary-color)',
-                            backgroundColor: 'rgba(99, 102, 241, 0.15)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: 'var(--primary-color)',
-                            pointBorderColor: 'white',
-                            pointBorderWidth: 3,
-                            pointRadius: 5,
-                            pointHoverRadius: 10,
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            duration: 2000,
-                            easing: 'easeInOutQuart'
+            currentCharts.dateChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Nombre d\'appels',
+                        data: values,
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#3B82F6',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
                         },
-                        plugins: {
-                            legend: {
-                                display: false
+                        tooltip: {
+                            backgroundColor: '#1F2937',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Appels: ${context.parsed.y.toLocaleString()}`;
+                                }
                             }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: 'var(--neutral-500)',
-                                    font: {
-                                        size: 12
-                                    }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#6B7280',
+                                callback: function(value) {
+                                    return value.toLocaleString();
                                 }
                             },
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'var(--neutral-200)',
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: 'var(--neutral-500)',
-                                    font: {
-                                        size: 12
-                                    }
-                                }
+                            grid: {
+                                color: '#E5E7EB',
+                                drawBorder: false
                             }
                         },
-                        elements: {
-                            point: {
-                                hoverBorderWidth: 4
+                        x: {
+                            ticks: {
+                                color: '#6B7280'
+                            },
+                            grid: {
+                                display: false
                             }
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: true
-                        },
-                        tooltips: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: 'white',
-                            bodyColor: 'white',
-                            borderColor: 'var(--primary-color)',
-                            borderWidth: 1
                         }
                     }
-                });
-            } catch (error) {
-                console.error('Erreur lors de la création du graphique des dates:', error);
-            }
+                }
+            });
         }
 
         function createTopNumbersChart() {
-            try {
-                const canvas = document.getElementById('topNumbersChart');
-                if (!canvas) {
-                    console.error('Canvas topNumbersChart non trouvé');
-                    return;
-                }
+            const ctx = document.getElementById('topNumbersChart').getContext('2d');
 
-                const ctx = canvas.getContext('2d');
-                const topEntries = Object.entries(callData.top_numbers).slice(0, 20);
-                const numbers = topEntries.map(([number, count]) => number);
-                const counts = topEntries.map(([number, count]) => count);
+            // Détruire le graphique existant s'il existe
+            if (currentCharts.topNumbersChart) {
+                currentCharts.topNumbersChart.destroy();
+            }
 
-                console.log('Données du graphique top numéros:', {
-                    nombre: numbers.length,
+            const numbers = Object.keys(callData.top_20_numbers).map(formatPhoneNumber);
+            const counts = Object.values(callData.top_20_numbers);
+
+            currentCharts.topNumbersChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
                     labels: numbers,
-                    valeurs: counts
-                });
-
-                // Vérifier que nous avons des données
-                if (numbers.length === 0 || counts.length === 0) {
-                    console.error('Aucune donnée disponible pour le graphique');
-                    return;
-                }
-
-                // Couleurs simples au lieu du dégradé (pour le débogage)
-                const barColor = '#f97316'; // Orange pour warning
-                // const barColor = '#ef4444'; // Rouge pour danger
-
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: numbers,
-                        datasets: [{
-                            label: 'Nombre d\'appels',
-                            data: counts,
-                            backgroundColor: function(context) {
-                                const index = context.dataIndex;
-                                const value = context.dataset.data[index];
-                                if (value > 30) return '#ef4444'; // Rouge pour valeurs critiques (>30)
-                                if (value > 20) return '#f97316'; // Orange pour valeurs élevées (>20)
-                                return '#10b981'; // Vert pour valeurs moyennes (≤20)
-                            },
-                            borderColor: function(context) {
-                                const index = context.dataIndex;
-                                const value = context.dataset.data[index];
-                                if (value > 30) return '#dc2626'; // Rouge foncé pour critiques
-                                if (value > 20) return '#ea580c'; // Orange foncé pour élevées
-                                return '#059669'; // Vert foncé pour moyennes
-                            },
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            borderSkipped: false,
-                            hoverBackgroundColor: '#6366f1', // Bleu indigo au survol
-                            hoverBorderColor: '#4f46e5',
-                            hoverBorderWidth: 3
-                        }]
+                    datasets: [{
+                        label: 'Nombre d\'appels',
+                        data: counts,
+                        backgroundColor: counts.map((count, index) => {
+                            if (count > 100) return '#EF4444';  // Rouge doux
+                            if (count > 50) return '#F59E0B';   // Orange doux
+                            if (count > 20) return '#3B82F6';   // Bleu doux
+                            return '#10B981';                    // Vert doux
+                        }),
+                        borderRadius: 6,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1F2937',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Appels: ${context.parsed.x}`;
+                                }
+                            }
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            duration: 2500,
-                            easing: 'easeOutBounce'
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#6B7280',
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: '#E5E7EB',
+                                drawBorder: false
+                            }
                         },
-                        plugins: {
-                            legend: {
+                        y: {
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
                                 display: false
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: 'white',
-                                bodyColor: 'white',
-                                borderColor: 'var(--primary-color)',
-                                borderWidth: 1,
-                                cornerRadius: 8
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: '#737373', // Gris neutre
-                                    font: {
-                                        size: 11,
-                                        weight: '600'
-                                    },
-                                    maxRotation: 45
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: '#e5e5e5', // Gris clair
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: '#737373', // Gris neutre
-                                    font: {
-                                        size: 12,
-                                        weight: '500'
-                                    }
-                                }
-                            }
-                        },
-                        elements: {
-                            bar: {
-                                hoverBorderWidth: 3
-                            }
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: false
-                        },
-                        onClick: function(event, elements) {
-                            if (elements.length > 0) {
-                                const elementIndex = elements[0].index;
-                                const phoneNumber = numbers[elementIndex];
-                                showHourHistory(phoneNumber);
                             }
                         }
                     }
-                });
-
-                console.log('Graphique Top 20 créé avec succès');
-            } catch (error) {
-                console.error('Erreur lors de la création du graphique des top numéros:', error);
-                console.error('Stack trace:', error.stack);
-            }
+                }
+            });
         }
 
 
         function createSuspectsTable() {
-            try {
-                const tbody = document.getElementById('suspectsTableBody');
-                if (!tbody) {
-                    console.error('Tableau suspectsTableBody non trouvé');
-                    return;
+            const tbody = document.getElementById('suspectsTableBody');
+            tbody.innerHTML = '';
+
+            Object.entries(callData.top_20_numbers).forEach(([number, count]) => {
+                const formattedNumber = formatPhoneNumber(number);
+                let risk, riskClass;
+
+                if (count > 100) {
+                    risk = 'Très Élevé';
+                    riskClass = 'risk-badge badge-danger';
+                } else if (count > 50) {
+                    risk = 'Élevé';
+                    riskClass = 'risk-badge badge-warning';
+                } else if (count > 20) {
+                    risk = 'Moyen';
+                    riskClass = 'risk-badge badge-info';
+                } else {
+                    risk = 'Faible';
+                    riskClass = 'risk-badge badge-success';
                 }
 
-                tbody.innerHTML = '';
-
-                const entries = Object.entries(callData.top_numbers).slice(0, 20);
-                console.log('Création du tableau des suspects avec', entries.length, 'entrées');
-
-                entries.forEach(([number, count]) => {
-                    const risk = count > 30 ? 'Critique' : count > 20 ? 'Élevé' : 'Moyen';
-                    const riskClass = count > 30 ? 'critical-badge' : count > 20 ? 'warning-badge' : 'success-badge';
-
-                    const row = `
-                        <tr onclick="showHourHistory('${number}')" style="cursor: pointer;">
-                            <td><strong>${number}</strong></td>
-                            <td>${count}</td>
-                            <td><span class="${riskClass}">${risk}</span></td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-
-                console.log('Tableau des suspects créé avec succès');
-            } catch (error) {
-                console.error('Erreur lors de la création du tableau des suspects:', error);
-            }
+                const row = `
+                    <tr>
+                        <td><strong>${formattedNumber}</strong></td>
+                        <td>${count.toLocaleString()}</td>
+                        <td><span class="${riskClass}">${risk}</span></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
         }
 
         function exportSpamList() {
-            const spamNumbers = Object.keys(callData.top_numbers);
-            const dataStr = 'Numéros à bloquer:\n' + spamNumbers.join('\n');
+            if (!callData) return;
+
+            const numbers = Object.keys(callData.top_20_numbers).map(formatPhoneNumber);
+            const devices = Object.keys(callData.top_20_devices);
+
+            const dataStr = `=== ANALYSE DES APPELS - ${callData.label} ===
+
+STATISTIQUES:
+- Total d'appels: ${callData.total_calls.toLocaleString()}
+- Numéros uniques: ${callData.unique_numbers.toLocaleString()}
+- Extensions uniques: ${callData.unique_devices.toLocaleString()}
+
+TOP 20 NUMÉROS LES PLUS APPELÉS:
+${Object.entries(callData.top_20_numbers).map(([num, count]) =>
+    `${formatPhoneNumber(num)}: ${count} appels`
+).join('\n')}
+
+TOP 20 EXTENSIONS LES PLUS UTILISÉES:
+${Object.entries(callData.top_20_devices).map(([dev, count]) =>
+    `${dev}: ${count} appels`
+).join('\n')}
+
+Généré le: ${new Date().toLocaleString('fr-FR')}
+`;
+
             const dataBlob = new Blob([dataStr], {type: 'text/plain'});
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'numeros_spam_a_bloquer.txt';
+            link.download = `analyse_appels_${document.getElementById('daySelector').value}.txt`;
             link.click();
             URL.revokeObjectURL(url);
         }
-
 
         function filterSuspects(level) {
             const rows = document.querySelectorAll('#suspectsTableBody tr');
             rows.forEach(row => {
                 const riskText = row.cells[2].textContent;
                 if (level === 'high') {
-                    row.style.display = riskText.includes('Élevé') || riskText.includes('Critique') ? '' : 'none';
+                    row.style.display = riskText.includes('Élevé') ? '' : 'none';
                 } else {
                     row.style.display = '';
                 }
             });
         }
 
-        // Variables pour le modal des heures
-        let hourHistoryChart = null;
-
-        function showHourHistory(phoneNumber) {
-            try {
-                // Mettre à jour le titre du modal
-                document.getElementById('selectedPhoneNumber').textContent = phoneNumber;
-
-                // Récupérer les données horaires pour ce numéro
-                const hourData = callData.calls_by_hour_per_number[phoneNumber];
-                if (!hourData) {
-                    console.error('Aucune donnée horaire trouvée pour ce numéro');
-                    return;
-                }
-
-                // Préparer les données pour le graphique
-                const hours = [];
-                const counts = [];
-
-                // Créer un tableau avec toutes les heures de 0 à 23
-                for (let hour = 0; hour < 24; hour++) {
-                    hours.push(hour.toString().padStart(2, '0') + ':00');
-                    counts.push(hourData[hour] || 0);
-                }
-
-                // Calculer les statistiques
-                const totalCalls = counts.reduce((sum, count) => sum + count, 0);
-                const peakHourIndex = counts.indexOf(Math.max(...counts));
-                const peakHour = hours[peakHourIndex];
-
-                // Récupérer les statistiques de durée
-                const durationData = callData.call_durations_per_number[phoneNumber];
-                let shortestCall = 'N/A';
-                let longestCall = 'N/A';
-
-                if (durationData) {
-                    // Formater les durées en minutes:secondes
-                    const formatDuration = (seconds) => {
-                        const mins = Math.floor(seconds / 60);
-                        const secs = seconds % 60;
-                        return `${mins}:${secs.toString().padStart(2, '0')}`;
-                    };
-
-                    shortestCall = formatDuration(durationData.min_duration);
-                    longestCall = formatDuration(durationData.max_duration);
-                }
-
-                // Mettre à jour les statistiques affichées
-                document.getElementById('totalCallsForNumber').textContent = totalCalls;
-                document.getElementById('peakHour').textContent = peakHour;
-                document.getElementById('shortestCall').textContent = shortestCall;
-                document.getElementById('longestCall').textContent = longestCall;
-
-                // Créer ou mettre à jour le graphique
-                const canvas = document.getElementById('hourHistoryChart');
-                const ctx = canvas.getContext('2d');
-
-                // Détruire le graphique existant s'il y en a un
-                if (hourHistoryChart) {
-                    hourHistoryChart.destroy();
-                }
-
-                hourHistoryChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: hours,
-                        datasets: [{
-                            label: 'Nombre d\'appels',
-                            data: counts,
-                            backgroundColor: function(context) {
-                                const value = context.dataset.data[context.dataIndex];
-                                if (value === 0) return 'rgba(156, 163, 175, 0.3)'; // Gris pour 0
-                                if (value > 10) return 'var(--danger-color)'; // Rouge pour beaucoup d'appels
-                                if (value > 5) return 'var(--warning-color)'; // Orange pour appels moyens
-                                return 'var(--primary-color)'; // Bleu pour peu d'appels
-                            },
-                            borderColor: function(context) {
-                                const value = context.dataset.data[context.dataIndex];
-                                if (value === 0) return 'rgba(156, 163, 175, 0.5)';
-                                if (value > 10) return '#dc2626';
-                                if (value > 5) return '#ea580c';
-                                return '#4f46e5';
-                            },
-                            borderWidth: 1,
-                            borderRadius: 4,
-                            borderSkipped: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            duration: 1000,
-                            easing: 'easeOutQuart'
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: 'white',
-                                bodyColor: 'white',
-                                borderColor: 'var(--primary-color)',
-                                borderWidth: 1,
-                                cornerRadius: 8,
-                                callbacks: {
-                                    title: function(context) {
-                                        return `Heure: ${context[0].label}`;
-                                    },
-                                    label: function(context) {
-                                        return `Appels: ${context.parsed.y}`;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: 'var(--neutral-500)',
-                                    font: {
-                                        size: 11
-                                    },
-                                    maxRotation: 45
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'var(--neutral-200)',
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: 'var(--neutral-500)',
-                                    font: {
-                                        size: 12
-                                    },
-                                    stepSize: 1
-                                }
-                            }
-                        },
-                        elements: {
-                            bar: {
-                                hoverBorderWidth: 2
-                            }
-                        }
-                    }
-                });
-
-                // Ouvrir le modal
-                const modal = new bootstrap.Modal(document.getElementById('hourHistoryModal'));
-                modal.show();
-
-                console.log('Modal des heures ouvert pour le numéro:', phoneNumber);
-            } catch (error) {
-                console.error('Erreur lors de l\'affichage de l\'historique des heures:', error);
-            }
+        // Initialiser le dashboard
+        async function init() {
+            await loadAllDaysData();
+            await loadSelectedDay();
         }
 
-        // Fonction d'animation de typing
-        function typeWriter(elementId, text, speed = 50) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-
-            element.innerHTML = '';
-            let i = 0;
-
-            const timer = setInterval(() => {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(timer);
-                    // Ajouter l'animation de clignotement du curseur
-                    element.innerHTML += '<span class="typing-cursor">|</span>';
-
-                    // Animation de pulse sur le titre
-                    setTimeout(() => {
-                        element.style.animation = 'pulse 1s ease-in-out';
-                    }, 500);
-                }
-            }, speed);
-        }
-
-        // Fonction pour ajouter l'effet de particules dynamiques
-        function createDynamicParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            if (!particlesContainer) return;
-
-            setInterval(() => {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 6 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-
-                particlesContainer.appendChild(particle);
-
-                // Supprimer la particule après l'animation
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 12000);
-            }, 2000);
-        }
-
-        // Initialiser le dashboard quand le DOM est prêt
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM chargé, initialisation du dashboard...');
-
-            // Animer le titre et le texte de l'alerte
-            setTimeout(() => {
-                typeWriter('alertTitle', '🚨 Alerte Spam Détectée !');
-            }, 500);
-
-            setTimeout(() => {
-                typeWriter('alertText', 'Plus de 13,000 appels courts et 318 numéros très actifs identifiés. Prêt à bloquer les spams ?');
-            }, 1500);
-
-            // Démarrer les particules dynamiques
-            createDynamicParticles();
-
-            loadData();
-        });
-
-        // Fallback au cas où DOMContentLoaded ne se déclenche pas
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadData);
-        } else {
-            console.log('DOM déjà chargé, initialisation immédiate...');
-            loadData();
-        }
+        init();
     </script>
 </body>
 </html>
