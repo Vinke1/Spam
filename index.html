@@ -526,12 +526,12 @@
             // Mettre à jour le message d'alerte
             const shortCallsPercent = (callData.call_categories.short_calls_lt_30s / callData.total_calls * 100).toFixed(1);
             const noAnswerPercent = (callData.call_categories.no_answer_0s / callData.total_calls * 100).toFixed(1);
-            const realCalls = callData.total_calls - callData.call_categories.short_calls_lt_30s - callData.call_categories.no_answer_0s;
-            const realCallsPercent = (realCalls / callData.total_calls * 100).toFixed(1);
+            const longCalls = callData.total_calls - callData.call_categories.short_calls_lt_30s - callData.call_categories.no_answer_0s;
+            const longCallsPercent = (longCalls / callData.total_calls * 100).toFixed(1);
             document.getElementById('alertMessage').innerHTML = `
                 ${callData.call_categories.short_calls_lt_30s.toLocaleString()} appels courts (&lt;30s, ${shortCallsPercent}%) et
                 ${callData.call_categories.no_answer_0s.toLocaleString()} sans réponse (${noAnswerPercent}%).
-                Il reste <strong>${realCalls.toLocaleString()} vrais appels</strong> (${realCallsPercent}%) pour un vrai besoin dans l'hôpital.
+                Il reste <strong>${longCalls.toLocaleString()} appels de longue durée</strong> (+30s, ${longCallsPercent}%).
                 Période: ${callData.label}
             `;
 
