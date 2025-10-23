@@ -959,8 +959,9 @@
                                     </div>
                                     <div class="card-body">
                                         <p><strong>Durée totale :</strong> ${details.duration_stats.total_formatted}</p>
-                                        <p><strong>Durée moyenne :</strong> ${details.duration_stats.avg_formatted}</p>
-                                        <p class="mb-0"><strong>Durée médiane :</strong> ${Math.floor(details.duration_stats.median_seconds / 60)}m ${Math.floor(details.duration_stats.median_seconds % 60)}s</p>
+                                        <p><strong>Durée minimum :</strong> ${details.duration_stats.min_formatted}</p>
+                                        <p><strong>Durée maximum :</strong> ${details.duration_stats.max_formatted}</p>
+                                        <p class="mb-0"><strong>Durée moyenne :</strong> ${details.duration_stats.avg_formatted}</p>
                                     </div>
                                 </div>
                             </div>
@@ -971,8 +972,7 @@
                                     </div>
                                     <div class="card-body">
                                         <p><strong>Appels répondus :</strong> ${details.call_distribution.answered_calls} (${details.call_distribution.answered_calls_percent.toFixed(1)}%)</p>
-                                        <p><strong>Sans réponse :</strong> ${details.call_distribution.no_answer} (${details.call_distribution.no_answer_percent.toFixed(1)}%)</p>
-                                        <p class="mb-0"><strong>Appels courts (&lt;30s) :</strong> ${details.call_distribution.short_calls_lt_30s} (${details.call_distribution.short_calls_lt_30s_percent.toFixed(1)}%)</p>
+                                        <p class="mb-0"><strong>Appels courts / Sans réponse (&lt;30s) :</strong> ${details.call_distribution.short_calls_lt_30s} (${details.call_distribution.short_calls_lt_30s_percent.toFixed(1)}%)</p>
                                     </div>
                                 </div>
                             </div>
