@@ -347,20 +347,13 @@
                 <div class="me-3">
                     <select class="form-select" id="daySelector" onchange="loadSelectedDay()">
                         <option value="global">📈 Analyse Globale</option>
-                        <option value="20251007">📅 07 Octobre 2025</option>
-                        <option value="20251008">📅 08 Octobre 2025</option>
-                        <option value="20251009">📅 09 Octobre 2025</option>
-                        <option value="20251010">📅 10 Octobre 2025</option>
-                        <option value="20251011">📅 11 Octobre 2025</option>
-                        <option value="20251012">📅 12 Octobre 2025</option>
-                        <option value="20251013">📅 13 Octobre 2025</option>
-                        <option value="20251014">📅 14 Octobre 2025</option>
-                        <option value="20251015">📅 15 Octobre 2025</option>
-                        <option value="20251016">📅 16 Octobre 2025</option>
-                        <option value="20251018">📅 18 Octobre 2025</option>
-                        <option value="20251019">📅 19 Octobre 2025</option>
-                        <option value="20251020">📅 20 Octobre 2025</option>
-                        <option value="20251021">📅 21 Octobre 2025</option>
+                        <option value="20251025">📅 25 Octobre 2025</option>
+                        <option value="20251026">📅 26 Octobre 2025</option>
+                        <option value="20251027">📅 27 Octobre 2025</option>
+                        <option value="20251028">📅 28 Octobre 2025</option>
+                        <option value="20251029">📅 29 Octobre 2025</option>
+                        <option value="20251030">📅 30 Octobre 2025</option>
+                        <option value="20251031">📅 31 Octobre 2025</option>
                     </select>
                 </div>
                 <span class="navbar-text">
@@ -661,10 +654,8 @@
         // Charger toutes les données des jours pour le graphique de comparaison
         async function loadAllDaysData() {
             const days = [
-                '20251007', '20251008', '20251009', '20251010',
-                '20251011', '20251012', '20251013', '20251014',
-                '20251015', '20251016', '20251018', '20251019',
-                '20251020', '20251021'
+                '20251025', '20251026', '20251027', '20251028',
+                '20251029', '20251030', '20251031'
             ];
             for (const day of days) {
                 try {
@@ -1403,7 +1394,12 @@
                     throw new Error('Aucune donnée trouvée pour cette extension');
                 }
 
+                // Utiliser le total officiel de analysis_global.json
                 const totalCallsFromData = callData.top_20_devices[deviceId] || totalCallsToDevice;
+
+                // Calculer le pourcentage d'appels tracés
+                const tracedCallsPercent = totalCallsFromData > 0 ? ((totalCallsToDevice / totalCallsFromData) * 100).toFixed(1) : 0;
+                const missingCalls = totalCallsFromData - totalCallsToDevice;
 
                 // Déterminer le niveau de risque
                 let riskLevel, riskClass, riskIcon;
@@ -1507,9 +1503,20 @@
                             </div>
                         </div>
 
+                        ${missingCalls > 0 ? `
+                        <div class="alert alert-warning" style="background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E;">
+                            <strong>⚠️ Données partielles</strong>
+                            <p class="mb-0 mt-2">
+                                Appels tracés : <strong>${totalCallsToDevice.toLocaleString()} / ${totalCallsFromData.toLocaleString()}</strong> (${tracedCallsPercent}%)<br>
+                                <strong>${missingCalls.toLocaleString()} appels</strong> proviennent d'autres numéros non listés dans le Top 20 des spammeurs.<br>
+                                Seuls les numéros du Top 20 qui ont cette extension dans leur top destinations sont affichés ci-dessous.
+                            </p>
+                        </div>
+                        ` : ''}
+
                         <div class="card mb-3" style="border: 1px solid var(--border);">
                             <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
-                                📞 Top Numéros Spammeurs (${callersData.length} au total)
+                                📞 Numéros Spammeurs Identifiés (${callersData.length} numéros)
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
@@ -1550,8 +1557,8 @@
                         <div class="alert alert-info" style="background: #ECFDF5; border: 1px solid #6EE7B7; color: #065F46;">
                             <strong>📊 Analyse de Fréquence</strong>
                             <p class="mb-0 mt-2">
-                                Cette extension représente <strong>${percentage}%</strong> du total des appels.
-                                Heure de pic : <strong>${peakHour}h avec environ ${Math.round(peakHourCalls)} appels</strong>.
+                                Cette extension représente <strong>${percentage}%</strong> du total des appels (${totalCallsFromData.toLocaleString()} appels).<br>
+                                Heure de pic : <strong>${peakHour}h avec environ ${Math.round(peakHourCalls)} appels</strong>.<br>
                                 ${totalCallsFromData > 500 ? 'Cette fréquence élevée suggère que cette extension est particulièrement ciblée par les spammeurs.' : 'Cette fréquence est dans la normale.'}
                             </p>
                         </div>
@@ -1563,7 +1570,8 @@
                             <div class="card-body">
                                 <p><strong>Période analysée :</strong> ${callData.label}</p>
                                 <p><strong>Classement :</strong> Top ${Object.keys(callData.top_20_devices).indexOf(deviceId) + 1} des extensions les plus sollicitées</p>
-                                <p class="mb-0"><strong>Nombre de spammeurs différents :</strong> ${callersData.length} numéros uniques</p>
+                                <p><strong>Numéros identifiés :</strong> ${callersData.length} numéros du Top 20 ont appelé cette extension</p>
+                                ${missingCalls > 0 ? `<p class="mb-0"><strong>Note :</strong> Les ${missingCalls.toLocaleString()} autres appels proviennent de numéros hors Top 20</p>` : '<p class="mb-0"><strong>Note :</strong> Tous les appels sont tracés</p>'}
                             </div>
                         </div>
                     </div>
