@@ -843,8 +843,12 @@
                 currentCharts.topNumbersChart.destroy();
             }
 
-            const numbers = Object.keys(callData.top_20_numbers).map(formatPhoneNumber);
-            const counts = Object.values(callData.top_20_numbers);
+            // Trier les numéros par nombre d'appels (décroissant)
+            const sortedNumbers = Object.entries(callData.top_20_numbers)
+                .sort((a, b) => b[1] - a[1]);
+
+            const numbers = sortedNumbers.map(entry => formatPhoneNumber(entry[0]));
+            const counts = sortedNumbers.map(entry => entry[1]);
 
             currentCharts.topNumbersChart = new Chart(ctx, {
                 type: 'bar',
@@ -920,7 +924,11 @@
             const tbody = document.getElementById('suspectsTableBody');
             tbody.innerHTML = '';
 
-            Object.entries(callData.top_20_numbers).forEach(([number, count]) => {
+            // Trier les numéros par nombre d'appels (décroissant)
+            const sortedNumbers = Object.entries(callData.top_20_numbers)
+                .sort((a, b) => b[1] - a[1]);
+
+            sortedNumbers.forEach(([number, count]) => {
                 const formattedNumber = formatPhoneNumber(number);
                 let risk, riskClass;
 
