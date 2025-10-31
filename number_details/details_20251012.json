@@ -1,0 +1,882 @@
+{
+  "59999.0": {
+    "number": "59999.0",
+    "label": "Jour 20251012",
+    "total_calls": 125,
+    "duration_stats": {
+      "total_seconds": 698,
+      "total_formatted": "0h 11m 38s",
+      "avg_seconds": 5.584,
+      "avg_formatted": "0m 5s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 190.0,
+      "max_formatted": "3m 10s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 118,
+      "short_calls_lt_30s_percent": 94.39999999999999,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 112,
+      "no_answer_percent": 89.60000000000001,
+      "answered_calls": 13,
+      "answered_calls_percent": 10.4
+    },
+    "peak_hours": {
+      "peak_hour": 19,
+      "peak_hour_calls": 14,
+      "calls_by_hour": {
+        "0": 9,
+        "2": 6,
+        "3": 3,
+        "4": 6,
+        "5": 10,
+        "6": 2,
+        "7": 2,
+        "8": 9,
+        "9": 5,
+        "10": 1,
+        "11": 8,
+        "12": 3,
+        "13": 10,
+        "14": 6,
+        "15": 12,
+        "16": 9,
+        "17": 6,
+        "18": 4,
+        "19": 14
+      }
+    },
+    "top_devices": {
+      "3189": 101,
+      "3591": 5,
+      "3063": 3,
+      "2602": 3,
+      "2604": 3,
+      "2860": 2,
+      "2979": 2,
+      "2611": 2,
+      "2606": 2,
+      "2764": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 125
+    }
+  },
+  "465390891.0": {
+    "number": "465390891.0",
+    "label": "Jour 20251012",
+    "total_calls": 19,
+    "duration_stats": {
+      "total_seconds": 622,
+      "total_formatted": "0h 10m 22s",
+      "avg_seconds": 32.73684210526316,
+      "avg_formatted": "0m 32s",
+      "median_seconds": 17.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 116.0,
+      "max_formatted": "1m 56s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 12,
+      "short_calls_lt_30s_percent": 63.1578947368421,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 6,
+      "no_answer_percent": 31.57894736842105,
+      "answered_calls": 13,
+      "answered_calls_percent": 68.42105263157895
+    },
+    "peak_hours": {
+      "peak_hour": 10,
+      "peak_hour_calls": 11,
+      "calls_by_hour": {
+        "7": 5,
+        "10": 11,
+        "22": 3
+      }
+    },
+    "top_devices": {
+      "5887": 11,
+      "1105": 3,
+      "1071": 2,
+      "1104": 1,
+      "8802": 1,
+      "8423": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 19
+    }
+  },
+  "471251409.0": {
+    "number": "471251409.0",
+    "label": "Jour 20251012",
+    "total_calls": 18,
+    "duration_stats": {
+      "total_seconds": 17,
+      "total_formatted": "0h 0m 17s",
+      "avg_seconds": 0.9444444444444444,
+      "avg_formatted": "0m 0s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 17.0,
+      "max_formatted": "0m 17s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 18,
+      "short_calls_lt_30s_percent": 100.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 17,
+      "no_answer_percent": 94.44444444444444,
+      "answered_calls": 1,
+      "answered_calls_percent": 5.555555555555555
+    },
+    "peak_hours": {
+      "peak_hour": 11,
+      "peak_hour_calls": 18,
+      "calls_by_hour": {
+        "11": 18
+      }
+    },
+    "top_devices": {
+      "9109": 18
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 18
+    }
+  },
+  "476560146.0": {
+    "number": "476560146.0",
+    "label": "Jour 20251012",
+    "total_calls": 12,
+    "duration_stats": {
+      "total_seconds": 0,
+      "total_formatted": "0h 0m 0s",
+      "avg_seconds": 0.0,
+      "avg_formatted": "0m 0s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 0.0,
+      "max_formatted": "0m 0s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 12,
+      "short_calls_lt_30s_percent": 100.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 12,
+      "no_answer_percent": 100.0,
+      "answered_calls": 0,
+      "answered_calls_percent": 0.0
+    },
+    "peak_hours": {
+      "peak_hour": 15,
+      "peak_hour_calls": 12,
+      "calls_by_hour": {
+        "15": 12
+      }
+    },
+    "top_devices": {
+      "9423": 11,
+      "7001": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 12
+    }
+  },
+  "479206144.0": {
+    "number": "479206144.0",
+    "label": "Jour 20251012",
+    "total_calls": 12,
+    "duration_stats": {
+      "total_seconds": 221,
+      "total_formatted": "0h 3m 41s",
+      "avg_seconds": 18.416666666666668,
+      "avg_formatted": "0m 18s",
+      "median_seconds": 10.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 54.0,
+      "max_formatted": "0m 54s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 8,
+      "short_calls_lt_30s_percent": 66.66666666666666,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 6,
+      "no_answer_percent": 50.0,
+      "answered_calls": 6,
+      "answered_calls_percent": 50.0
+    },
+    "peak_hours": {
+      "peak_hour": 15,
+      "peak_hour_calls": 10,
+      "calls_by_hour": {
+        "15": 10,
+        "21": 2
+      }
+    },
+    "top_devices": {
+      "1103": 5,
+      "1035": 2,
+      "1031": 1,
+      "1037": 1,
+      "1015": 1,
+      "1019": 1,
+      "1045": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 12
+    }
+  },
+  "33695217683.0": {
+    "number": "33695217683.0",
+    "label": "Jour 20251012",
+    "total_calls": 11,
+    "duration_stats": {
+      "total_seconds": 329,
+      "total_formatted": "0h 5m 29s",
+      "avg_seconds": 29.90909090909091,
+      "avg_formatted": "0m 29s",
+      "median_seconds": 41.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 72.0,
+      "max_formatted": "1m 12s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 5,
+      "short_calls_lt_30s_percent": 45.45454545454545,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 5,
+      "no_answer_percent": 45.45454545454545,
+      "answered_calls": 6,
+      "answered_calls_percent": 54.54545454545454
+    },
+    "peak_hours": {
+      "peak_hour": 9,
+      "peak_hour_calls": 9,
+      "calls_by_hour": {
+        "9": 9,
+        "10": 2
+      }
+    },
+    "top_devices": {
+      "8802": 3,
+      "1123": 2,
+      "1031": 1,
+      "1027": 1,
+      "8810": 1,
+      "1781": 1,
+      "1115": 1,
+      "1045": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 11
+    }
+  },
+  "497304452.0": {
+    "number": "497304452.0",
+    "label": "Jour 20251012",
+    "total_calls": 8,
+    "duration_stats": {
+      "total_seconds": 236,
+      "total_formatted": "0h 3m 56s",
+      "avg_seconds": 29.5,
+      "avg_formatted": "0m 29s",
+      "median_seconds": 14.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 162.0,
+      "max_formatted": "2m 42s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 7,
+      "short_calls_lt_30s_percent": 87.5,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 3,
+      "no_answer_percent": 37.5,
+      "answered_calls": 5,
+      "answered_calls_percent": 62.5
+    },
+    "peak_hours": {
+      "peak_hour": 14,
+      "peak_hour_calls": 8,
+      "calls_by_hour": {
+        "14": 8
+      }
+    },
+    "top_devices": {
+      "9962": 2,
+      "1143": 2,
+      "1046": 1,
+      "1005": 1,
+      "1129": 1,
+      "1042": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 8
+    }
+  },
+  "495926013.0": {
+    "number": "495926013.0",
+    "label": "Jour 20251012",
+    "total_calls": 8,
+    "duration_stats": {
+      "total_seconds": 886,
+      "total_formatted": "0h 14m 46s",
+      "avg_seconds": 110.75,
+      "avg_formatted": "1m 50s",
+      "median_seconds": 83.0,
+      "min_seconds": 32.0,
+      "min_formatted": "0m 32s",
+      "max_seconds": 272.0,
+      "max_formatted": "4m 32s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 0,
+      "short_calls_lt_30s_percent": 0.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 0,
+      "no_answer_percent": 0.0,
+      "answered_calls": 8,
+      "answered_calls_percent": 100.0
+    },
+    "peak_hours": {
+      "peak_hour": 6,
+      "peak_hour_calls": 3,
+      "calls_by_hour": {
+        "6": 3,
+        "7": 1,
+        "10": 3,
+        "12": 1
+      }
+    },
+    "top_devices": {
+      "8403": 3,
+      "4017": 2,
+      "8303": 1,
+      "8473": 1,
+      "8302": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 8
+    }
+  },
+  "479214119.0": {
+    "number": "479214119.0",
+    "label": "Jour 20251012",
+    "total_calls": 8,
+    "duration_stats": {
+      "total_seconds": 193,
+      "total_formatted": "0h 3m 13s",
+      "avg_seconds": 24.125,
+      "avg_formatted": "0m 24s",
+      "median_seconds": 7.5,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 99.0,
+      "max_formatted": "1m 39s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 5,
+      "short_calls_lt_30s_percent": 62.5,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 4,
+      "no_answer_percent": 50.0,
+      "answered_calls": 4,
+      "answered_calls_percent": 50.0
+    },
+    "peak_hours": {
+      "peak_hour": 3,
+      "peak_hour_calls": 4,
+      "calls_by_hour": {
+        "3": 4,
+        "11": 4
+      }
+    },
+    "top_devices": {
+      "1105": 3,
+      "5887": 2,
+      "8802": 2,
+      "8813": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 8
+    }
+  },
+  "483452772.0": {
+    "number": "483452772.0",
+    "label": "Jour 20251012",
+    "total_calls": 8,
+    "duration_stats": {
+      "total_seconds": 284,
+      "total_formatted": "0h 4m 44s",
+      "avg_seconds": 35.5,
+      "avg_formatted": "0m 35s",
+      "median_seconds": 19.5,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 113.0,
+      "max_formatted": "1m 53s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 5,
+      "short_calls_lt_30s_percent": 62.5,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 2,
+      "no_answer_percent": 25.0,
+      "answered_calls": 6,
+      "answered_calls_percent": 75.0
+    },
+    "peak_hours": {
+      "peak_hour": 12,
+      "peak_hour_calls": 6,
+      "calls_by_hour": {
+        "11": 2,
+        "12": 6
+      }
+    },
+    "top_devices": {
+      "5887": 3,
+      "1068": 2,
+      "1104": 1,
+      "1049": 1,
+      "1105": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 8
+    }
+  },
+  "497121774.0": {
+    "number": "497121774.0",
+    "label": "Jour 20251012",
+    "total_calls": 8,
+    "duration_stats": {
+      "total_seconds": 133,
+      "total_formatted": "0h 2m 13s",
+      "avg_seconds": 16.625,
+      "avg_formatted": "0m 16s",
+      "median_seconds": 19.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 38.0,
+      "max_formatted": "0m 38s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 6,
+      "short_calls_lt_30s_percent": 75.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 3,
+      "no_answer_percent": 37.5,
+      "answered_calls": 5,
+      "answered_calls_percent": 62.5
+    },
+    "peak_hours": {
+      "peak_hour": 12,
+      "peak_hour_calls": 8,
+      "calls_by_hour": {
+        "12": 8
+      }
+    },
+    "top_devices": {
+      "1104": 2,
+      "1091": 2,
+      "5887": 2,
+      "1117": 1,
+      "1009": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 8
+    }
+  },
+  "470174715.0": {
+    "number": "470174715.0",
+    "label": "Jour 20251012",
+    "total_calls": 7,
+    "duration_stats": {
+      "total_seconds": 47,
+      "total_formatted": "0h 0m 47s",
+      "avg_seconds": 6.714285714285714,
+      "avg_formatted": "0m 6s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 36.0,
+      "max_formatted": "0m 36s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 6,
+      "short_calls_lt_30s_percent": 85.71428571428571,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 5,
+      "no_answer_percent": 71.42857142857143,
+      "answered_calls": 2,
+      "answered_calls_percent": 28.57142857142857
+    },
+    "peak_hours": {
+      "peak_hour": 15,
+      "peak_hour_calls": 7,
+      "calls_by_hour": {
+        "15": 7
+      }
+    },
+    "top_devices": {
+      "1105": 3,
+      "1028": 2,
+      "5887": 1,
+      "8273": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 7
+    }
+  },
+  "472696422.0": {
+    "number": "472696422.0",
+    "label": "Jour 20251012",
+    "total_calls": 7,
+    "duration_stats": {
+      "total_seconds": 72,
+      "total_formatted": "0h 1m 12s",
+      "avg_seconds": 10.285714285714286,
+      "avg_formatted": "0m 10s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 67.0,
+      "max_formatted": "1m 7s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 6,
+      "short_calls_lt_30s_percent": 85.71428571428571,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 5,
+      "no_answer_percent": 71.42857142857143,
+      "answered_calls": 2,
+      "answered_calls_percent": 28.57142857142857
+    },
+    "peak_hours": {
+      "peak_hour": 11,
+      "peak_hour_calls": 4,
+      "calls_by_hour": {
+        "11": 4,
+        "12": 3
+      }
+    },
+    "top_devices": {
+      "9321": 5,
+      "7280": 2
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 7
+    }
+  },
+  "489183486.0": {
+    "number": "489183486.0",
+    "label": "Jour 20251012",
+    "total_calls": 7,
+    "duration_stats": {
+      "total_seconds": 507,
+      "total_formatted": "0h 8m 27s",
+      "avg_seconds": 72.42857142857143,
+      "avg_formatted": "1m 12s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 336.0,
+      "max_formatted": "5m 36s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 4,
+      "short_calls_lt_30s_percent": 57.14285714285714,
+      "long_calls_gt_5min": 1,
+      "long_calls_gt_5min_percent": 14.285714285714285,
+      "no_answer": 4,
+      "no_answer_percent": 57.14285714285714,
+      "answered_calls": 3,
+      "answered_calls_percent": 42.857142857142854
+    },
+    "peak_hours": {
+      "peak_hour": 9,
+      "peak_hour_calls": 7,
+      "calls_by_hour": {
+        "9": 7
+      }
+    },
+    "top_devices": {
+      "8372": 3,
+      "1008": 2,
+      "8802": 1,
+      "8373": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 7
+    }
+  },
+  "472310319.0": {
+    "number": "472310319.0",
+    "label": "Jour 20251012",
+    "total_calls": 7,
+    "duration_stats": {
+      "total_seconds": 92,
+      "total_formatted": "0h 1m 32s",
+      "avg_seconds": 13.142857142857142,
+      "avg_formatted": "0m 13s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 67.0,
+      "max_formatted": "1m 7s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 6,
+      "short_calls_lt_30s_percent": 85.71428571428571,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 5,
+      "no_answer_percent": 71.42857142857143,
+      "answered_calls": 2,
+      "answered_calls_percent": 28.57142857142857
+    },
+    "peak_hours": {
+      "peak_hour": 11,
+      "peak_hour_calls": 5,
+      "calls_by_hour": {
+        "8": 2,
+        "11": 5
+      }
+    },
+    "top_devices": {
+      "7700": 6,
+      "7751": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 7
+    }
+  },
+  "476397287.0": {
+    "number": "476397287.0",
+    "label": "Jour 20251012",
+    "total_calls": 6,
+    "duration_stats": {
+      "total_seconds": 473,
+      "total_formatted": "0h 7m 53s",
+      "avg_seconds": 78.83333333333333,
+      "avg_formatted": "1m 18s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 247.0,
+      "max_formatted": "4m 7s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 4,
+      "short_calls_lt_30s_percent": 66.66666666666666,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 4,
+      "no_answer_percent": 66.66666666666666,
+      "answered_calls": 2,
+      "answered_calls_percent": 33.33333333333333
+    },
+    "peak_hours": {
+      "peak_hour": 19,
+      "peak_hour_calls": 4,
+      "calls_by_hour": {
+        "11": 1,
+        "12": 1,
+        "19": 4
+      }
+    },
+    "top_devices": {
+      "3308": 6
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 6
+    }
+  },
+  "471908627.0": {
+    "number": "471908627.0",
+    "label": "Jour 20251012",
+    "total_calls": 6,
+    "duration_stats": {
+      "total_seconds": 200,
+      "total_formatted": "0h 3m 20s",
+      "avg_seconds": 33.333333333333336,
+      "avg_formatted": "0m 33s",
+      "median_seconds": 33.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 68.0,
+      "max_formatted": "1m 8s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 3,
+      "short_calls_lt_30s_percent": 50.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 3,
+      "no_answer_percent": 50.0,
+      "answered_calls": 3,
+      "answered_calls_percent": 50.0
+    },
+    "peak_hours": {
+      "peak_hour": 12,
+      "peak_hour_calls": 6,
+      "calls_by_hour": {
+        "12": 6
+      }
+    },
+    "top_devices": {
+      "1115": 2,
+      "1105": 1,
+      "5887": 1,
+      "1034": 1,
+      "1043": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 6
+    }
+  },
+  "495508754.0": {
+    "number": "495508754.0",
+    "label": "Jour 20251012",
+    "total_calls": 6,
+    "duration_stats": {
+      "total_seconds": 78,
+      "total_formatted": "0h 1m 18s",
+      "avg_seconds": 13.0,
+      "avg_formatted": "0m 13s",
+      "median_seconds": 5.5,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 48.0,
+      "max_formatted": "0m 48s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 5,
+      "short_calls_lt_30s_percent": 83.33333333333334,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 3,
+      "no_answer_percent": 50.0,
+      "answered_calls": 3,
+      "answered_calls_percent": 50.0
+    },
+    "peak_hours": {
+      "peak_hour": 13,
+      "peak_hour_calls": 5,
+      "calls_by_hour": {
+        "10": 1,
+        "13": 5
+      }
+    },
+    "top_devices": {
+      "9463": 3,
+      "9684": 2,
+      "7298": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 6
+    }
+  },
+  "477866795.0": {
+    "number": "477866795.0",
+    "label": "Jour 20251012",
+    "total_calls": 6,
+    "duration_stats": {
+      "total_seconds": 253,
+      "total_formatted": "0h 4m 13s",
+      "avg_seconds": 42.166666666666664,
+      "avg_formatted": "0m 42s",
+      "median_seconds": 23.5,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 141.0,
+      "max_formatted": "2m 21s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 3,
+      "short_calls_lt_30s_percent": 50.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 2,
+      "no_answer_percent": 33.33333333333333,
+      "answered_calls": 4,
+      "answered_calls_percent": 66.66666666666666
+    },
+    "peak_hours": {
+      "peak_hour": 9,
+      "peak_hour_calls": 3,
+      "calls_by_hour": {
+        "9": 3,
+        "14": 3
+      }
+    },
+    "top_devices": {
+      "5887": 4,
+      "1105": 2
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 6
+    }
+  },
+  "490210192.0": {
+    "number": "490210192.0",
+    "label": "Jour 20251012",
+    "total_calls": 5,
+    "duration_stats": {
+      "total_seconds": 227,
+      "total_formatted": "0h 3m 47s",
+      "avg_seconds": 45.4,
+      "avg_formatted": "0m 45s",
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "min_formatted": "0m 0s",
+      "max_seconds": 162.0,
+      "max_formatted": "2m 42s"
+    },
+    "call_distribution": {
+      "short_calls_lt_30s": 3,
+      "short_calls_lt_30s_percent": 60.0,
+      "long_calls_gt_5min": 0,
+      "long_calls_gt_5min_percent": 0.0,
+      "no_answer": 3,
+      "no_answer_percent": 60.0,
+      "answered_calls": 2,
+      "answered_calls_percent": 40.0
+    },
+    "peak_hours": {
+      "peak_hour": 18,
+      "peak_hour_calls": 3,
+      "calls_by_hour": {
+        "16": 1,
+        "17": 1,
+        "18": 3
+      }
+    },
+    "top_devices": {
+      "2784": 2,
+      "3735": 2,
+      "3734": 1
+    },
+    "calls_by_date": {
+      "2025-10-12 00:00:00": 5
+    }
+  }
+}
