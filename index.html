@@ -966,8 +966,12 @@
                 currentCharts.topDevicesChart.destroy();
             }
 
-            const devices = Object.keys(callData.top_20_devices);
-            const counts = Object.values(callData.top_20_devices);
+            // Trier les extensions par nombre d'appels (décroissant)
+            const sortedDevices = Object.entries(callData.top_20_devices)
+                .sort((a, b) => b[1] - a[1]);
+
+            const devices = sortedDevices.map(entry => entry[0]);
+            const counts = sortedDevices.map(entry => entry[1]);
 
             currentCharts.topDevicesChart = new Chart(ctx, {
                 type: 'bar',
@@ -1042,7 +1046,11 @@
             const tbody = document.getElementById('devicesTableBody');
             tbody.innerHTML = '';
 
-            Object.entries(callData.top_20_devices).forEach(([device, count]) => {
+            // Trier les extensions par nombre d'appels (décroissant)
+            const sortedDevices = Object.entries(callData.top_20_devices)
+                .sort((a, b) => b[1] - a[1]);
+
+            sortedDevices.forEach(([device, count]) => {
                 let risk, riskClass;
 
                 if (count > 1000) {
