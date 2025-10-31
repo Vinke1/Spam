@@ -304,6 +304,37 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-gray);
         }
+
+        /* Onglets personnalisés */
+        .nav-tabs-custom {
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs-custom .nav-link {
+            color: var(--text-gray);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs-custom .nav-link:hover {
+            color: var(--primary);
+            border-bottom-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            color: var(--primary);
+            background: transparent;
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            animation: fadeIn 0.4s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -391,50 +422,121 @@
             </div>
         </div>
 
-        <!-- Graphiques -->
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card dashboard-card">
-                    <div class="card-header">
-                        <h5 class="mb-0 card-header-icon">
-                            <span>📞</span> Top 20 Numéros les Plus Fréquents
-                        </h5>
+        <!-- Navigation par onglets -->
+        <ul class="nav nav-tabs nav-tabs-custom" id="analysisTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="external-tab" data-bs-toggle="tab" data-bs-target="#external-content" type="button" role="tab" aria-controls="external-content" aria-selected="true">
+                    📞 Numéros Externes Spammeurs
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="internal-tab" data-bs-toggle="tab" data-bs-target="#internal-content" type="button" role="tab" aria-controls="internal-content" aria-selected="false">
+                    📱 Extensions Internes Spammées
+                </button>
+            </li>
+        </ul>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content" id="analysisTabsContent">
+            <!-- Onglet 1: Numéros Externes -->
+            <div class="tab-pane fade show active" id="external-content" role="tabpanel" aria-labelledby="external-tab">
+                <!-- Graphiques -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card dashboard-card">
+                            <div class="card-header">
+                                <h5 class="mb-0 card-header-icon">
+                                    <span>📞</span> Top 20 Numéros les Plus Fréquents
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="topNumbersChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="topNumbersChart"></canvas>
+                </div>
+
+                <!-- Table des Numéros -->
+                <div class="card dashboard-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 card-header-icon">
+                            <span>📋</span> Détail des Numéros Externes
+                        </h5>
+                        <div>
+                            <button class="btn btn-modern btn-sm" onclick="filterSuspects('high')">
+                                Filtrer Risque Élevé
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table" id="suspectsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Numéro</th>
+                                        <th>Nombre d'Appels</th>
+                                        <th>Niveau de Risque</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="suspectsTableBody">
+                                    <!-- Données chargées dynamiquement -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Table des Numéros -->
-        <div class="card dashboard-card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 card-header-icon">
-                    <span>📋</span> Détail des Numéros
-                </h5>
-                <div>
-                    <button class="btn btn-modern btn-sm" onclick="filterSuspects('high')">
-                        Filtrer Risque Élevé
-                    </button>
+            <!-- Onglet 2: Extensions Internes -->
+            <div class="tab-pane fade" id="internal-content" role="tabpanel" aria-labelledby="internal-tab">
+                <!-- Graphiques -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card dashboard-card">
+                            <div class="card-header">
+                                <h5 class="mb-0 card-header-icon">
+                                    <span>📱</span> Top 20 Extensions les Plus Sollicitées
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="topDevicesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table" id="suspectsTable">
-                        <thead>
-                            <tr>
-                                <th>Numéro</th>
-                                <th>Nombre d'Appels</th>
-                                <th>Niveau de Risque</th>
-                            </tr>
-                        </thead>
-                        <tbody id="suspectsTableBody">
-                            <!-- Données chargées dynamiquement -->
-                        </tbody>
-                    </table>
+
+                <!-- Table des Extensions -->
+                <div class="card dashboard-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 card-header-icon">
+                            <span>📋</span> Détail des Extensions Internes
+                        </h5>
+                        <div>
+                            <button class="btn btn-modern btn-sm" onclick="filterDevices('high')">
+                                Filtrer Risque Élevé
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table" id="devicesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Extension</th>
+                                        <th>Nombre d'Appels</th>
+                                        <th>Niveau de Risque</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="devicesTableBody">
+                                    <!-- Données chargées dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -458,19 +560,44 @@
         </div>
     </div>
 
-    <!-- Modal pour les détails d'un numéro -->
+    <!-- Modal pour les détails d'un numéro externe -->
     <div class="modal fade" id="numberDetailsModal" tabindex="-1" aria-labelledby="numberDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="background: linear-gradient(135deg, var(--primary) 0%, #2563EB 100%); color: white;">
                     <h5 class="modal-title" id="numberDetailsModalLabel">
-                        <span style="font-size: 1.5rem;">📱</span> Détails du Numéro
+                        <span style="font-size: 1.5rem;">📱</span> Détails du Numéro Externe
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalBody">
                     <div class="text-center py-4">
                         <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                        <p class="mt-2">Chargement des statistiques...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-modern" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les détails d'une extension interne -->
+    <div class="modal fade" id="deviceDetailsModal" tabindex="-1" aria-labelledby="deviceDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white;">
+                    <h5 class="modal-title" id="deviceDetailsModalLabel">
+                        <span style="font-size: 1.5rem;">📱</span> Détails de l'Extension Interne
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="deviceModalBody">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-success" role="status">
                             <span class="visually-hidden">Chargement...</span>
                         </div>
                         <p class="mt-2">Chargement des statistiques...</p>
@@ -515,18 +642,19 @@
                 const alertMessage = document.getElementById('alertMessage');
                 alertMessage.innerHTML = `
                     <strong>⚠️ Impossible de charger les données</strong><br><br>
-                    <strong>Raison :</strong> Les navigateurs bloquent le chargement de fichiers locaux pour des raisons de sécurité.<br><br>
-                    <strong>Solutions :</strong><br>
-                    1️⃣ Double-cliquez sur <strong>OUVRIR_DASHBOARD.bat</strong> (plus simple)<br>
-                    2️⃣ Ou dans un terminal : <code style="background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">python -m http.server 8000</code><br>
-                    3️⃣ Ou publiez sur GitHub Pages (voir DEPLOY_GITHUB.md)
+                    <strong>Raison :</strong> Vous ouvrez le fichier directement depuis le système de fichiers (file://).<br><br>
+                    <strong>Solution :</strong><br>
+                    📤 Publiez ce projet sur <strong>GitHub Pages</strong> pour qu'il fonctionne correctement.<br>
+                    Une fois publié sur GitHub Pages, tous les fichiers JSON seront chargés automatiquement via HTTP/HTTPS.
                 `;
 
                 // Afficher aussi dans la console pour plus de détails
-                console.log('%c🔧 SOLUTIONS', 'font-size: 16px; font-weight: bold; color: #3B82F6;');
-                console.log('1. Double-cliquez sur OUVRIR_DASHBOARD.bat');
-                console.log('2. Ou exécutez: python -m http.server 8000');
-                console.log('3. Puis ouvrez: http://localhost:8000');
+                console.log('%c📤 DÉPLOIEMENT REQUIS', 'font-size: 16px; font-weight: bold; color: #3B82F6;');
+                console.log('Ce dashboard est conçu pour GitHub Pages.');
+                console.log('1. Créez un repository GitHub');
+                console.log('2. Poussez tous les fichiers (HTML, JSON, etc.)');
+                console.log('3. Activez GitHub Pages dans Settings > Pages');
+                console.log('4. Accédez à votre dashboard via l\'URL GitHub Pages');
             }
         }
 
@@ -623,10 +751,12 @@
             // Mettre à jour la date
             document.getElementById('lastUpdate').textContent = new Date().toLocaleString('fr-FR');
 
-            // Créer les graphiques
+            // Créer les graphiques et tableaux
             createDateChart();
             createTopNumbersChart();
             createSuspectsTable();
+            createTopDevicesChart();
+            createDevicesTable();
         }
 
 
@@ -820,6 +950,118 @@
                 const row = `
                     <tr style="cursor: pointer;" onclick="showNumberDetails('${number}')" class="number-row">
                         <td><strong style="color: var(--primary);">${formattedNumber}</strong></td>
+                        <td>${count.toLocaleString()}</td>
+                        <td><span class="${riskClass}">${risk}</span></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function createTopDevicesChart() {
+            const ctx = document.getElementById('topDevicesChart').getContext('2d');
+
+            // Détruire le graphique existant s'il existe
+            if (currentCharts.topDevicesChart) {
+                currentCharts.topDevicesChart.destroy();
+            }
+
+            const devices = Object.keys(callData.top_20_devices);
+            const counts = Object.values(callData.top_20_devices);
+
+            currentCharts.topDevicesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: devices,
+                    datasets: [{
+                        label: 'Nombre d\'appels reçus',
+                        data: counts,
+                        backgroundColor: counts.map((count, index) => {
+                            if (count > 1000) return '#EF4444';  // Rouge doux
+                            if (count > 500) return '#F59E0B';   // Orange doux
+                            if (count > 200) return '#3B82F6';   // Bleu doux
+                            return '#10B981';                    // Vert doux
+                        }),
+                        borderRadius: 6,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1F2937',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Appels reçus: ${context.parsed.x}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#6B7280',
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: '#E5E7EB',
+                                drawBorder: false
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createDevicesTable() {
+            const tbody = document.getElementById('devicesTableBody');
+            tbody.innerHTML = '';
+
+            Object.entries(callData.top_20_devices).forEach(([device, count]) => {
+                let risk, riskClass;
+
+                if (count > 1000) {
+                    risk = 'Très Élevé';
+                    riskClass = 'risk-badge badge-danger';
+                } else if (count > 500) {
+                    risk = 'Élevé';
+                    riskClass = 'risk-badge badge-warning';
+                } else if (count > 200) {
+                    risk = 'Moyen';
+                    riskClass = 'risk-badge badge-info';
+                } else {
+                    risk = 'Faible';
+                    riskClass = 'risk-badge badge-success';
+                }
+
+                const row = `
+                    <tr style="cursor: pointer;" onclick="showDeviceDetails('${device}')" class="number-row">
+                        <td><strong style="color: var(--accent);">Extension ${device}</strong></td>
                         <td>${count.toLocaleString()}</td>
                         <td><span class="${riskClass}">${risk}</span></td>
                     </tr>
@@ -1076,6 +1318,315 @@
             }
         }
 
+        async function showDeviceDetails(deviceId) {
+            const modal = new bootstrap.Modal(document.getElementById('deviceDetailsModal'));
+            const modalBody = document.getElementById('deviceModalBody');
+
+            // Afficher le spinner
+            modalBody.innerHTML = `
+                <div class="text-center py-4">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="mt-2">Chargement des statistiques...</p>
+                </div>
+            `;
+
+            modal.show();
+
+            try {
+                // Charger le fichier de détails approprié
+                const selector = document.getElementById('daySelector');
+                const selectedDay = selector.value;
+
+                let detailsFilename;
+                if (selectedDay === 'global') {
+                    detailsFilename = 'number_details/details_global.json';
+                } else {
+                    detailsFilename = `number_details/details_${selectedDay}.json`;
+                }
+
+                // Charger les détails
+                const response = await fetch(detailsFilename);
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const allDetails = await response.json();
+
+                // Trouver tous les numéros qui ont appelé cette extension
+                const callersData = [];
+                let totalCallsToDevice = 0;
+                let totalDurationSeconds = 0;
+                const hourlyDistribution = {};
+
+                // Initialiser la distribution horaire
+                for (let i = 0; i < 24; i++) {
+                    hourlyDistribution[i] = 0;
+                }
+
+                Object.entries(allDetails).forEach(([number, details]) => {
+                    if (details.top_devices && details.top_devices[deviceId]) {
+                        const callsFromThisNumber = details.top_devices[deviceId];
+                        totalCallsToDevice += callsFromThisNumber;
+
+                        // Calculer la contribution à la durée totale (approximation)
+                        const avgDuration = details.duration_stats.avg_seconds || 0;
+                        totalDurationSeconds += callsFromThisNumber * avgDuration;
+
+                        // Ajouter à la distribution horaire (proportionnellement)
+                        Object.entries(details.peak_hours.calls_by_hour).forEach(([hour, calls]) => {
+                            const proportion = callsFromThisNumber / details.total_calls;
+                            hourlyDistribution[hour] = (hourlyDistribution[hour] || 0) + (calls * proportion);
+                        });
+
+                        callersData.push({
+                            number: number,
+                            calls: callsFromThisNumber,
+                            totalCalls: details.total_calls,
+                            avgDuration: details.duration_stats.avg_formatted
+                        });
+                    }
+                });
+
+                // Trier par nombre d'appels décroissant
+                callersData.sort((a, b) => b.calls - a.calls);
+
+                if (callersData.length === 0) {
+                    throw new Error('Aucune donnée trouvée pour cette extension');
+                }
+
+                const totalCallsFromData = callData.top_20_devices[deviceId] || totalCallsToDevice;
+
+                // Déterminer le niveau de risque
+                let riskLevel, riskClass, riskIcon;
+                if (totalCallsFromData > 1000) {
+                    riskLevel = 'Très Élevé';
+                    riskClass = 'danger';
+                    riskIcon = '🔴';
+                } else if (totalCallsFromData > 500) {
+                    riskLevel = 'Élevé';
+                    riskClass = 'warning';
+                    riskIcon = '🟠';
+                } else if (totalCallsFromData > 200) {
+                    riskLevel = 'Moyen';
+                    riskClass = 'info';
+                    riskIcon = '🔵';
+                } else {
+                    riskLevel = 'Faible';
+                    riskClass = 'success';
+                    riskIcon = '🟢';
+                }
+
+                // Calculer le pourcentage par rapport au total
+                const percentage = ((totalCallsFromData / callData.total_calls) * 100).toFixed(2);
+
+                // Trouver l'heure de pic
+                let peakHour = 0;
+                let peakHourCalls = 0;
+                Object.entries(hourlyDistribution).forEach(([hour, calls]) => {
+                    if (calls > peakHourCalls) {
+                        peakHourCalls = calls;
+                        peakHour = parseInt(hour);
+                    }
+                });
+
+                // Calculer la durée moyenne
+                const avgDurationSeconds = totalCallsToDevice > 0 ? totalDurationSeconds / totalCallsToDevice : 0;
+                const avgDurationFormatted = formatDuration(avgDurationSeconds);
+
+                // Préparer les données pour le graphique horaire
+                const hours = Object.keys(hourlyDistribution).sort((a, b) => parseInt(a) - parseInt(b));
+                const hourLabels = hours.map(h => `${h}h`);
+                const hourValues = hours.map(h => Math.round(hourlyDistribution[h]));
+
+                // Afficher les statistiques
+                modalBody.innerHTML = `
+                    <div class="container-fluid">
+                        <div class="row mb-4">
+                            <div class="col-12 text-center">
+                                <h2 style="color: var(--accent); font-weight: 700;">Extension ${deviceId}</h2>
+                                <div class="badge bg-${riskClass} fs-6 px-3 py-2 mt-2">
+                                    ${riskIcon} Niveau de risque : ${riskLevel}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">
+                                            ${totalCallsFromData.toLocaleString()}
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            TOTAL D'APPELS REÇUS
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">
+                                            ${callersData.length}
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            NUMÉROS DIFFÉRENTS
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="background: var(--bg-light); border: none;">
+                                    <div class="card-body text-center">
+                                        <div style="font-size: 2rem; font-weight: 700; color: var(--warning);">
+                                            ${peakHour}h
+                                        </div>
+                                        <div style="color: var(--text-gray); font-size: 0.875rem; font-weight: 600;">
+                                            HEURE DE PIC
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                📈 Distribution Horaire
+                            </div>
+                            <div class="card-body">
+                                <canvas id="deviceHourlyDistributionChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                📞 Top Numéros Spammeurs (${callersData.length} au total)
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                    <table class="table table-sm">
+                                        <thead style="position: sticky; top: 0; background: white; z-index: 1;">
+                                            <tr>
+                                                <th>Numéro</th>
+                                                <th>Appels vers ${deviceId}</th>
+                                                <th>% du total du numéro</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${callersData.map(caller => {
+                                                const formattedNumber = formatPhoneNumber(caller.number);
+                                                const percentOfCaller = ((caller.calls / caller.totalCalls) * 100).toFixed(1);
+                                                return `
+                                                    <tr>
+                                                        <td><strong style="color: var(--primary);">${formattedNumber}</strong></td>
+                                                        <td>${caller.calls} appels</td>
+                                                        <td>
+                                                            <div class="progress" style="height: 20px;">
+                                                                <div class="progress-bar" role="progressbar"
+                                                                     style="width: ${percentOfCaller}%; background-color: var(--accent);"
+                                                                     aria-valuenow="${percentOfCaller}" aria-valuemin="0" aria-valuemax="100">
+                                                                    ${percentOfCaller}%
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                `;
+                                            }).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info" style="background: #ECFDF5; border: 1px solid #6EE7B7; color: #065F46;">
+                            <strong>📊 Analyse de Fréquence</strong>
+                            <p class="mb-0 mt-2">
+                                Cette extension représente <strong>${percentage}%</strong> du total des appels.
+                                Heure de pic : <strong>${peakHour}h avec environ ${Math.round(peakHourCalls)} appels</strong>.
+                                ${totalCallsFromData > 500 ? 'Cette fréquence élevée suggère que cette extension est particulièrement ciblée par les spammeurs.' : 'Cette fréquence est dans la normale.'}
+                            </p>
+                        </div>
+
+                        <div class="card" style="border: 1px solid var(--border);">
+                            <div class="card-header" style="background: var(--bg-light); font-weight: 600;">
+                                ℹ️ Informations Complémentaires
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Période analysée :</strong> ${callData.label}</p>
+                                <p><strong>Classement :</strong> Top ${Object.keys(callData.top_20_devices).indexOf(deviceId) + 1} des extensions les plus sollicitées</p>
+                                <p class="mb-0"><strong>Nombre de spammeurs différents :</strong> ${callersData.length} numéros uniques</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Créer le graphique de distribution horaire
+                setTimeout(() => {
+                    const ctx = document.getElementById('deviceHourlyDistributionChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: hourLabels,
+                            datasets: [{
+                                label: 'Nombre d\'appels',
+                                data: hourValues,
+                                backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                                borderColor: 'rgba(16, 185, 129, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: '#1F2937',
+                                    padding: 12,
+                                    cornerRadius: 8
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { color: '#6B7280' },
+                                    grid: { color: '#E5E7EB' }
+                                },
+                                x: {
+                                    ticks: { color: '#6B7280' },
+                                    grid: { display: false }
+                                }
+                            }
+                        }
+                    });
+                }, 100);
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des détails:', error);
+                modalBody.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>❌ Erreur</strong><br>
+                        Impossible de charger les détails de l'extension. Veuillez réessayer.
+                    </div>
+                `;
+            }
+        }
+
+        function formatDuration(seconds) {
+            if (seconds < 60) {
+                return `${Math.round(seconds)}s`;
+            } else if (seconds < 3600) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.round(seconds % 60);
+                return `${minutes}m ${secs}s`;
+            } else {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return `${hours}h ${minutes}m`;
+            }
+        }
+
         function exportSpamList() {
             if (!callData) return;
 
@@ -1113,6 +1664,18 @@ Généré le: ${new Date().toLocaleString('fr-FR')}
 
         function filterSuspects(level) {
             const rows = document.querySelectorAll('#suspectsTableBody tr');
+            rows.forEach(row => {
+                const riskText = row.cells[2].textContent;
+                if (level === 'high') {
+                    row.style.display = riskText.includes('Élevé') ? '' : 'none';
+                } else {
+                    row.style.display = '';
+                }
+            });
+        }
+
+        function filterDevices(level) {
+            const rows = document.querySelectorAll('#devicesTableBody tr');
             rows.forEach(row => {
                 const riskText = row.cells[2].textContent;
                 if (level === 'high') {
