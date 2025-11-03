@@ -534,6 +534,270 @@
             </div>
         </div>
 
+        <!-- Analyse des Durées Spam -->
+        <div class="row mb-4 mt-4">
+            <div class="col-md-12">
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 card-header-icon">
+                            <span>⏱️</span> Analyse des Durées d'Appels Suspectes
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert" style="background: #FEF3C7; border: 1px solid #FDE68A; color: #92400E; margin-bottom: 1.5rem;">
+                            <strong>🔍 Détection de Patterns Spam</strong>
+                            <p class="mb-0 mt-2">
+                                Les systèmes de spam automatisés ont tendance à appeler avec des durées précises et répétitives.
+                                Nous avons identifié <strong>5 durées suspectes</strong> totalisant <strong id="totalSpamCalls">-</strong> appels.
+                            </p>
+                        </div>
+
+                        <!-- Onglets pour les différentes durées -->
+                        <ul class="nav nav-tabs nav-tabs-custom" id="durationTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="duration-18s-tab" data-bs-toggle="tab" data-bs-target="#duration-18s" type="button" role="tab">
+                                    ⏱️ 18 secondes
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="duration-19s-tab" data-bs-toggle="tab" data-bs-target="#duration-19s" type="button" role="tab">
+                                    ⏱️ 19 secondes
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="duration-32s-tab" data-bs-toggle="tab" data-bs-target="#duration-32s" type="button" role="tab">
+                                    ⏱️ 32 secondes
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="duration-29s-tab" data-bs-toggle="tab" data-bs-target="#duration-29s" type="button" role="tab">
+                                    ⏱️ 29 secondes
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="duration-13s-tab" data-bs-toggle="tab" data-bs-target="#duration-13s" type="button" role="tab">
+                                    ⏱️ 13 secondes
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Contenu des onglets de durées -->
+                        <div class="tab-content mt-3" id="durationTabsContent">
+                            <!-- Onglet 18 secondes -->
+                            <div class="tab-pane fade show active" id="duration-18s" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--danger);" id="duration-18s-total">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">TOTAL APPELS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--warning);" id="duration-18s-unique">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">NUMÉROS DIFFÉRENTS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);" id="duration-18s-avg">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">APPELS / NUMÉRO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rang</th>
+                                                <th>Numéro</th>
+                                                <th>Nombre d'Appels</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="duration-18s-table"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Onglet 19 secondes -->
+                            <div class="tab-pane fade" id="duration-19s" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--danger);" id="duration-19s-total">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">TOTAL APPELS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--warning);" id="duration-19s-unique">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">NUMÉROS DIFFÉRENTS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);" id="duration-19s-avg">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">APPELS / NUMÉRO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rang</th>
+                                                <th>Numéro</th>
+                                                <th>Nombre d'Appels</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="duration-19s-table"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Onglet 32 secondes -->
+                            <div class="tab-pane fade" id="duration-32s" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--danger);" id="duration-32s-total">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">TOTAL APPELS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--warning);" id="duration-32s-unique">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">NUMÉROS DIFFÉRENTS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);" id="duration-32s-avg">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">APPELS / NUMÉRO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rang</th>
+                                                <th>Numéro</th>
+                                                <th>Nombre d'Appels</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="duration-32s-table"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Onglet 29 secondes -->
+                            <div class="tab-pane fade" id="duration-29s" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--danger);" id="duration-29s-total">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">TOTAL APPELS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--warning);" id="duration-29s-unique">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">NUMÉROS DIFFÉRENTS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);" id="duration-29s-avg">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">APPELS / NUMÉRO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rang</th>
+                                                <th>Numéro</th>
+                                                <th>Nombre d'Appels</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="duration-29s-table"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Onglet 13 secondes -->
+                            <div class="tab-pane fade" id="duration-13s" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--danger);" id="duration-13s-total">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">TOTAL APPELS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--warning);" id="duration-13s-unique">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">NUMÉROS DIFFÉRENTS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background: var(--bg-light); border: none;">
+                                            <div class="card-body text-center">
+                                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);" id="duration-13s-avg">-</div>
+                                                <div style="color: var(--text-gray); font-size: 0.813rem; font-weight: 600;">APPELS / NUMÉRO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rang</th>
+                                                <th>Numéro</th>
+                                                <th>Nombre d'Appels</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="duration-13s-table"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Évolution des appels par jour -->
         <div class="row mb-4 mt-4">
             <div class="col-md-12">
@@ -1675,10 +1939,69 @@ Généré le: ${new Date().toLocaleString('fr-FR')}
             });
         }
 
+        // Variables globales pour les durées spam
+        let spamDurationsData = null;
+
+        // Charger les données des durées spam
+        async function loadSpamDurations() {
+            try {
+                const response = await fetch('spam_durations_analysis.json');
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                spamDurationsData = await response.json();
+                updateSpamDurationsDisplay();
+            } catch (error) {
+                console.error('Erreur lors du chargement des durées spam:', error);
+            }
+        }
+
+        // Mettre à jour l'affichage des durées spam
+        function updateSpamDurationsDisplay() {
+            if (!spamDurationsData) return;
+
+            // Calculer le total d'appels spam
+            let totalSpamCalls = 0;
+            Object.values(spamDurationsData).forEach(data => {
+                totalSpamCalls += data.total_calls;
+            });
+
+            document.getElementById('totalSpamCalls').textContent = totalSpamCalls.toLocaleString();
+
+            // Mettre à jour chaque onglet
+            ['18s', '19s', '32s', '29s', '13s'].forEach(duration => {
+                const data = spamDurationsData[duration];
+                if (data) {
+                    // Mettre à jour les statistiques
+                    document.getElementById(`duration-${duration}-total`).textContent = data.total_calls.toLocaleString();
+                    document.getElementById(`duration-${duration}-unique`).textContent = data.unique_numbers.toLocaleString();
+                    const avgCalls = (data.total_calls / data.unique_numbers).toFixed(1);
+                    document.getElementById(`duration-${duration}-avg`).textContent = avgCalls;
+
+                    // Remplir le tableau
+                    const tableBody = document.getElementById(`duration-${duration}-table`);
+                    tableBody.innerHTML = '';
+
+                    data.top_20.forEach((entry, index) => {
+                        const formattedNumber = formatPhoneNumber(entry.number);
+                        const row = `
+                            <tr class="number-row">
+                                <td><strong>${index + 1}</strong></td>
+                                <td><strong style="color: var(--primary);">${formattedNumber}</strong></td>
+                                <td><span style="font-weight: 600; color: var(--danger);">${entry.calls} appels</span></td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            });
+        }
+
         // Initialiser le dashboard
         async function init() {
             await loadAllDaysData();
             await loadSelectedDay();
+            await loadSpamDurations();
         }
 
         init();
