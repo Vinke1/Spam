@@ -548,7 +548,8 @@
                             <strong>🔍 Détection de Patterns Spam</strong>
                             <p class="mb-0 mt-2">
                                 Les systèmes de spam automatisés ont tendance à appeler avec des durées précises et répétitives.
-                                Nous avons identifié <strong>5 durées suspectes</strong> totalisant <strong id="totalSpamCalls">-</strong> appels.
+                                Nous avons identifié <strong>5 durées suspectes</strong> totalisant <strong id="totalSpamCalls">-</strong> appels
+                                <span id="spamDurationPeriod"></span>.
                             </p>
                         </div>
 
@@ -880,9 +881,9 @@
 
             let filename;
             if (selectedDay === 'global') {
-                filename = 'analysis_results/analysis_global.json';
+                filename = 'data/analysis/analysis_global.json';
             } else {
-                filename = `analysis_results/analysis_${selectedDay}.json`;
+                filename = `data/analysis/analysis_${selectedDay}.json`;
             }
 
             try {
@@ -892,6 +893,9 @@
                 }
                 callData = await response.json();
                 updateDashboard();
+
+                // Recharger aussi les durées spam pour la date sélectionnée
+                await loadSpamDurations();
             } catch (error) {
                 console.error('Erreur lors du chargement des données:', error);
 
@@ -923,7 +927,7 @@
             ];
             for (const day of days) {
                 try {
-                    const response = await fetch(`analysis_results/analysis_${day}.json`);
+                    const response = await fetch(`data/analysis/analysis_${day}.json`);
                     if (response.ok) {
                         allDaysData[day] = await response.json();
                     }
@@ -1364,9 +1368,9 @@
 
                 let detailsFilename;
                 if (selectedDay === 'global') {
-                    detailsFilename = 'number_details/details_global.json';
+                    detailsFilename = 'data/number_details/details_global.json';
                 } else {
-                    detailsFilename = `number_details/details_${selectedDay}.json`;
+                    detailsFilename = `data/number_details/details_${selectedDay}.json`;
                 }
 
                 // Charger les détails
@@ -1612,9 +1616,9 @@
 
                 let deviceDetailsFilename;
                 if (selectedDay === 'global') {
-                    deviceDetailsFilename = 'device_details/device_details_global.json';
+                    deviceDetailsFilename = 'data/device_details/device_details_global.json';
                 } else {
-                    deviceDetailsFilename = `device_details/device_details_${selectedDay}.json`;
+                    deviceDetailsFilename = `data/device_details/device_details_${selectedDay}.json`;
                 }
 
                 // Charger les détails des extensions
@@ -1945,7 +1949,18 @@ Généré le: ${new Date().toLocaleString('fr-FR')}
         // Charger les données des durées spam
         async function loadSpamDurations() {
             try {
-                const response = await fetch('spam_durations_analysis.json');
+                // Déterminer quel fichier charger en fonction de la date sélectionnée
+                const selector = document.getElementById('daySelector');
+                const selectedDay = selector.value;
+
+                let filename;
+                if (selectedDay === 'global') {
+                    filename = 'data/spam_durations/spam_durations_global.json';
+                } else {
+                    filename = `data/spam_durations/spam_durations_${selectedDay}.json`;
+                }
+
+                const response = await fetch(filename);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP: ${response.status}`);
                 }
@@ -1953,6 +1968,8 @@ Généré le: ${new Date().toLocaleString('fr-FR')}
                 updateSpamDurationsDisplay();
             } catch (error) {
                 console.error('Erreur lors du chargement des durées spam:', error);
+                // En cas d'erreur, afficher un message dans la section
+                document.getElementById('totalSpamCalls').textContent = 'Erreur de chargement';
             }
         }
 
@@ -1967,6 +1984,20 @@ Généré le: ${new Date().toLocaleString('fr-FR')}
             });
 
             document.getElementById('totalSpamCalls').textContent = totalSpamCalls.toLocaleString();
+
+            // Afficher la période analysée
+            const selector = document.getElementById('daySelector');
+            const selectedDay = selector.value;
+            const periodText = document.getElementById('spamDurationPeriod');
+
+            if (selectedDay === 'global') {
+                periodText.textContent = 'pour toute la période (25-31 octobre 2025)';
+            } else {
+                const year = selectedDay.substring(0, 4);
+                const month = selectedDay.substring(4, 6);
+                const day = selectedDay.substring(6, 8);
+                periodText.textContent = `le ${day}/${month}/${year}`;
+            }
 
             // Mettre à jour chaque onglet
             ['18s', '19s', '32s', '29s', '13s'].forEach(duration => {

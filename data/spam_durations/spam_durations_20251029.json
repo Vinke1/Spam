@@ -1,0 +1,437 @@
+{
+  "18s": {
+    "duration": "18 secondes",
+    "total_calls": 1170,
+    "unique_numbers": 566,
+    "top_20": [
+      {
+        "number": "473821748",
+        "calls": 29
+      },
+      {
+        "number": "456892818",
+        "calls": 19
+      },
+      {
+        "number": "475492639",
+        "calls": 17
+      },
+      {
+        "number": "494034706",
+        "calls": 16
+      },
+      {
+        "number": "478061108",
+        "calls": 16
+      },
+      {
+        "number": "489314154",
+        "calls": 12
+      },
+      {
+        "number": "488612869",
+        "calls": 12
+      },
+      {
+        "number": "478601801",
+        "calls": 11
+      },
+      {
+        "number": "479368555",
+        "calls": 11
+      },
+      {
+        "number": "486774470",
+        "calls": 11
+      },
+      {
+        "number": "472348271",
+        "calls": 10
+      },
+      {
+        "number": "470980704",
+        "calls": 10
+      },
+      {
+        "number": "475237021",
+        "calls": 10
+      },
+      {
+        "number": "22962409",
+        "calls": 9
+      },
+      {
+        "number": "479296598",
+        "calls": 9
+      },
+      {
+        "number": "473548133",
+        "calls": 9
+      },
+      {
+        "number": "495567213",
+        "calls": 9
+      },
+      {
+        "number": "495500129",
+        "calls": 9
+      },
+      {
+        "number": "24656390",
+        "calls": 9
+      },
+      {
+        "number": "483742382",
+        "calls": 8
+      }
+    ]
+  },
+  "19s": {
+    "duration": "19 secondes",
+    "total_calls": 909,
+    "unique_numbers": 543,
+    "top_20": [
+      {
+        "number": "466331823",
+        "calls": 13
+      },
+      {
+        "number": "477253126",
+        "calls": 13
+      },
+      {
+        "number": "472508694",
+        "calls": 12
+      },
+      {
+        "number": "485852883",
+        "calls": 11
+      },
+      {
+        "number": "478601801",
+        "calls": 9
+      },
+      {
+        "number": "496483484",
+        "calls": 9
+      },
+      {
+        "number": "496500391",
+        "calls": 9
+      },
+      {
+        "number": "483593220",
+        "calls": 8
+      },
+      {
+        "number": "479363440",
+        "calls": 8
+      },
+      {
+        "number": "488386825",
+        "calls": 8
+      },
+      {
+        "number": "476713070",
+        "calls": 8
+      },
+      {
+        "number": "475894412",
+        "calls": 7
+      },
+      {
+        "number": "495557230",
+        "calls": 7
+      },
+      {
+        "number": "472651912",
+        "calls": 7
+      },
+      {
+        "number": "475902455",
+        "calls": 7
+      },
+      {
+        "number": "497602964",
+        "calls": 6
+      },
+      {
+        "number": "498974786",
+        "calls": 6
+      },
+      {
+        "number": "479726427",
+        "calls": 6
+      },
+      {
+        "number": "496405456",
+        "calls": 6
+      },
+      {
+        "number": "477020016",
+        "calls": 6
+      }
+    ]
+  },
+  "32s": {
+    "duration": "32 secondes",
+    "total_calls": 1090,
+    "unique_numbers": 325,
+    "top_20": [
+      {
+        "number": "491624031",
+        "calls": 69
+      },
+      {
+        "number": "67830489",
+        "calls": 48
+      },
+      {
+        "number": "476786685",
+        "calls": 47
+      },
+      {
+        "number": "23891351",
+        "calls": 43
+      },
+      {
+        "number": "484160207",
+        "calls": 31
+      },
+      {
+        "number": "478700373",
+        "calls": 29
+      },
+      {
+        "number": "474627610",
+        "calls": 29
+      },
+      {
+        "number": "497375486",
+        "calls": 24
+      },
+      {
+        "number": "23556048",
+        "calls": 23
+      },
+      {
+        "number": "495806464",
+        "calls": 23
+      },
+      {
+        "number": "474539933",
+        "calls": 19
+      },
+      {
+        "number": "496309391",
+        "calls": 18
+      },
+      {
+        "number": "494349438",
+        "calls": 18
+      },
+      {
+        "number": "486399423",
+        "calls": 16
+      },
+      {
+        "number": "475369327",
+        "calls": 14
+      },
+      {
+        "number": "489115769",
+        "calls": 14
+      },
+      {
+        "number": "472282811",
+        "calls": 14
+      },
+      {
+        "number": "487131553",
+        "calls": 13
+      },
+      {
+        "number": "470785204",
+        "calls": 12
+      },
+      {
+        "number": "23514957",
+        "calls": 11
+      }
+    ]
+  },
+  "29s": {
+    "duration": "29 secondes",
+    "total_calls": 723,
+    "unique_numbers": 449,
+    "top_20": [
+      {
+        "number": "485348833",
+        "calls": 20
+      },
+      {
+        "number": "478550822",
+        "calls": 14
+      },
+      {
+        "number": "475964507",
+        "calls": 14
+      },
+      {
+        "number": "484110643",
+        "calls": 12
+      },
+      {
+        "number": "26479207",
+        "calls": 9
+      },
+      {
+        "number": "486522915",
+        "calls": 9
+      },
+      {
+        "number": "22962409",
+        "calls": 7
+      },
+      {
+        "number": "488518989",
+        "calls": 7
+      },
+      {
+        "number": "487507889",
+        "calls": 7
+      },
+      {
+        "number": "476425798",
+        "calls": 7
+      },
+      {
+        "number": "472380147",
+        "calls": 7
+      },
+      {
+        "number": "488382181",
+        "calls": 6
+      },
+      {
+        "number": "465704834",
+        "calls": 6
+      },
+      {
+        "number": "496533012",
+        "calls": 6
+      },
+      {
+        "number": "476881629",
+        "calls": 6
+      },
+      {
+        "number": "479093379",
+        "calls": 5
+      },
+      {
+        "number": "25440360",
+        "calls": 5
+      },
+      {
+        "number": "498114860",
+        "calls": 5
+      },
+      {
+        "number": "494339326",
+        "calls": 5
+      },
+      {
+        "number": "22952386",
+        "calls": 5
+      }
+    ]
+  },
+  "13s": {
+    "duration": "13 secondes",
+    "total_calls": 269,
+    "unique_numbers": 229,
+    "top_20": [
+      {
+        "number": "23440044",
+        "calls": 6
+      },
+      {
+        "number": "483434756",
+        "calls": 6
+      },
+      {
+        "number": "497553718",
+        "calls": 4
+      },
+      {
+        "number": "475491476",
+        "calls": 3
+      },
+      {
+        "number": "33620318450",
+        "calls": 3
+      },
+      {
+        "number": "488246041",
+        "calls": 3
+      },
+      {
+        "number": "472074314",
+        "calls": 2
+      },
+      {
+        "number": "473236947",
+        "calls": 2
+      },
+      {
+        "number": "475807436",
+        "calls": 2
+      },
+      {
+        "number": "465525322",
+        "calls": 2
+      },
+      {
+        "number": "483562957",
+        "calls": 2
+      },
+      {
+        "number": "488569998",
+        "calls": 2
+      },
+      {
+        "number": "476202239",
+        "calls": 2
+      },
+      {
+        "number": "476706705",
+        "calls": 2
+      },
+      {
+        "number": "474649437",
+        "calls": 2
+      },
+      {
+        "number": "476324823",
+        "calls": 2
+      },
+      {
+        "number": "474431262",
+        "calls": 2
+      },
+      {
+        "number": "495440204",
+        "calls": 2
+      },
+      {
+        "number": "473366904",
+        "calls": 2
+      },
+      {
+        "number": "456921481",
+        "calls": 2
+      }
+    ]
+  }
+}
